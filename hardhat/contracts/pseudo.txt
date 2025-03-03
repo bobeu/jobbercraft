@@ -1,0 +1,131 @@
+JobberCraft is a decentraized freelancing platform. Coined from the words: Hire and Work. A true freelance 
+platform that connects job creators with job seekers using smart agreement in a manner that removes centralization, yet enforces 
+quality with convenient means of paymenta platform where Hirer finds the best hand for their jobs. 
+
+- Experienced, qualified and approved Job seekers can pick up a job, complete it within set deadline 
+    , and automatically receive the pay soon as hirer confirms job done. This action is final and
+    irreversible.
+    JobberCraft protects both the Hirer and Job seekers in the context of each contract agreement.
+
+    It is mandatory for Job seekers to sign up and complete an initial test, based on their fields.
+    NB: JobberCraft might use a third party service. 
+
+    Steps
+    -----
+    o Hirer interacts with JobberCraft using externally owned accounts using a web3 wallet e.g Metamask.
+    o Hirer publishes job opportunity. 
+      - When function is called, Hirer prefunds the contract with the offer amount. by minting an NFT
+          which acts a placeholder for the posted jobs on JobberCraft. 
+          @dev Note:
+          ---------
+          When a job publication is made, a link to the job hosted on our github org or elsewhere is 
+          extracted. The returned URI acts as the metadata url
+          for the NFT.
+      - Hirer inputs all neccessary details including deadline for submission and confirm to publish.
+      - Offer amount is locked in contract until the set deadline with the exception of the following 
+          conditions:
+
+      Cancellation
+      ------------
+        Hirer is at liberty to cancel job posted based on the following conditions:
+          o If no interest was shown at the time of cancellation, NFT for offer is burnt, and fund returned to hirer.
+          o If interest is available, offer is cancelled and an integrity fee is charged, and balance refunded.
+
+    o Job seekers show interest by calling a function.
+    o As many job seekers as possible can show interests.
+    o They can as well collaborate on as many jobs as possible.
+    o Hirer is able to scrutinize Jobber's resumez.
+    o Hirer chooses to accept interests or discard them.
+    o Hirer is able to rate Jobber.
+    o Able to view previous works Jobber has completed including other profile information.
+    o Can further tip Jobber after the job is completed. 
+
+- Hirer can browse through projects and ideas to select one (s) that best fit their needs.
+    The steps involve in this are same as above except that projects are already written by someone.
+    This feature will be integrated in the future.
+- Hirer can browse through Jobbers resumez.
+- JobberCraft encourages developers or jobbers to collaborate on a job.
+
+Contracts types
+---------------
+    o ERC721 (NFT Minter).
+    o ERC20 
+    o Main.
+        - On job completion:
+            * Hirer confirms job ok (A call is initiated).
+            * Pay (less commission) is immediately released :
+                                                    If Jobber work solo, they get full payment.
+                                                    If Jobber collaborate with others, pay is splitted among Jobbers in 
+                                                        the agreed or equal ratio.
+                                                        
+            * Jobber's rating increases by 5 if approved otherwise 2 if on probation.
+            * Deal is finalized, and WORK is farmed.
+
+
+========================================================================================================================
+
+  # Token contracts.
+        ERC20
+        -----
+            - Name: JobberCraft Token.
+            - Symbol: WORK.
+            - Total Supply: 50_000_000.
+            - Decimals: 18.
+            - Mintable: True.
+            - Type: ERC20.
+            - Transferable: True.
+
+                o The native token of the JobberCraft platform. 
+                o Only 20 million WORK will exist in the asset's lifetime.
+                o 20% only will be sold.
+                o The rest will be used as reward for participating in the ecosystem.
+                o Hirer and Jobbers can farm WORK by hiring and completing jobs.
+                o Farmed WORK are locked until 3 months elapsed from the time it was minted.
+
+        ERC721
+        ------
+        - Use as:
+          (a). Membership status for Job seekers.
+          (b). Award trackers and recongnition for hirers.
+        
+        - On registration, Jobbers mint JobberCraft Probationary Member (HPM) valid through
+            the period Jobber is yet to complete screening/competency test. Jobbers with HPM can only accept
+            jobs with price range from 10 MATIC to 500 MATIC. Minting HPM costs 10 * 10**18 MATIC.
+
+        - HPM can be upgraded to JobberCraft Approved Member (HAM) soon as Jobbers complete screening test.
+            When this happens, HPM is burnt to mint HAM.  Minting HAM costs 100 MATIC. Jobbers in this
+            category can accept jobs from 10 MATIC to amount with no limit.
+
+            1: { 
+                    Name: JobberCraft Probationary Member,
+                    Symbol: HPM,
+                    Total Supply: ~,
+                    Mintable: True,
+                    Type: ERC721,
+                    Transferable: False
+                }
+            2: { 
+                    Name: Approved JobberCraft Membership,
+                    Symbol: HAM,
+                    Total Supply: ~,
+                    Mintable: True,
+                    Type: ERC721,
+                    Transferable: False
+                }
+        }
+
+  o Membership.
+      - Each member is assigned a unique id from the HPM contract.
+      - Each member can only retain one HPM at any time.
+
+=================================================================================================
+
+HOW WE PLAN TO MANAGE JOBS
+--------------------------
+- Tentatively, JobberCraft will coordinate all jobs under one github baseURI 
+using organization account standard. 
+- Approved Jobbers are added to the organization's github team's page
+    all members must own a github account.
+- Hirer could be added to our page or rather use their personal github
+    account to host the job.
+
