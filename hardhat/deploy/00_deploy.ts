@@ -13,7 +13,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
   const feeTo = await deploy('FeeTo', {
     from: deployer,
     gasLimit: 4000000,
-    args: [cUSD]
+    args: []
   });
 
   console.log('FeeTo deployed to ...', feeTo.address);
@@ -31,7 +31,7 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
 
   console.log('tUSDT deployed to ...', tUSDT.address);
 
-  const jobbers = await deploy('Jobbers', {
+  const jobber = await deploy('Jobber', {
     from: deployer,
     gasLimit: 4000000,
     args: [
@@ -39,19 +39,9 @@ const func: DeployFunction = async function (hre: HardhatRuntimeEnvironment) {
       upgrader,
     ]
   });
-  // probation.address,
-  // approved.address,
-  // tUSDT.address
-  console.log("JobberCraft deployed to", jobbers.address);
-
-  // const workToken = await deploy('JOBTOKEN', {
-  //   from: deployer,
-  //   gasLimit: 4000000,
-  //   args: [hiAddress],
-  // });
-
-
+  console.log("Jobber deployed to", jobber.address);
+  console.log("JobberCraft deployed to", jCraft.address);
 };
 
 export default func;
-func.tags = ['JobberCraft', 'JOBTOKEN', 'Jobbers'];
+func.tags = ['JobberCraft', 'Craft', 'Jobbers'];

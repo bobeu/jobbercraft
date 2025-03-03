@@ -48,7 +48,7 @@ describe("JobberCraft test", function () {
     await feeTo.deployed();
 
     // Deploy Jobber contract
-    const Jobbers = await ethers.getContractFactory("Jobbers");
+    const Jobbers = await ethers.getContractFactory("Jobber");
     const jobbers = await Jobbers.deploy(feeTo.address, upgrader.address);
     await jobbers.deployed();
 
@@ -162,7 +162,7 @@ describe("JobberCraft test", function () {
       return await jCraft.getRequests(jobId);
     };
 
-    // initializes Hiwork function
+    // initializes contract state
     await jCraft.initialize(CANCELLATION_FEE_RATE, MINIMUM_OFFER, testcUSD.address, jobbers.address);
 
     return {

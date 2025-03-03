@@ -2,15 +2,15 @@
 
 pragma solidity 0.8.24;
 
-import "./ReadOnly.sol";
-import "./utils/Lib.sol";
-import "./utils/SafeCall.sol";
-import "./interfaces/ITrustee.sol";
-import "./Trustee.sol";
-import "./curators/Curators.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
-// import "@openzeppelin/contracts/interfaces/IERC20.sol";
-import "@openzeppelin/contracts/utils/Address.sol";
+import { ReadOnly } from "./ReadOnly.sol";
+import { Lib } from "./utils/Lib.sol";
+import { SafeCall } from "./utils/SafeCall.sol";
+import { ITrustee } from "./interfaces/ITrustee.sol";
+import { Trustee } from "./Trustee.sol";
+import { IJobber } from "./jobbers/IJobbers.sol";
+import { Curators } from "./curators/Curators.sol";
+import { Pausable } from "@openzeppelin/contracts/security/Pausable.sol";
+import { Address } from "@openzeppelin/contracts/utils/Address.sol";
 
 /**
       @@@\
@@ -65,7 +65,7 @@ contract JobberCraft is ReadOnly, Pausable, Curators {
    * @param _initializer : Used to set initial parameters. 
    *  The parameters can only be altered the number of times the _initializer was set.
   */
-  constructor (uint8 _initializer, address _feeTo) Storage(_feeTo) { 
+  constructor (uint8 _initializer, address _feeTo) ReadOnly(_feeTo) { 
     initializer = _initializer; 
   }
 
@@ -294,7 +294,7 @@ contract JobberCraft is ReadOnly, Pausable, Curators {
             o NFT membership is not transferable.
    */
   function _enforceJobOfferLimit(uint256 offerPrice, address jobber) internal view {
-    uint256 c1 = IJobbers(jobberContract).getAvatarInfo(jobber);
+    uint256 c1 = IJobber(jobberContract).getAvatarInfo(jobber);
     // if(c1 == 1) revert("Here");
     if(c1 == 1) {
       if(probationOfferLimit > 0) {

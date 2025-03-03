@@ -10,7 +10,7 @@ import "../tokens/erc721/interfaces/IERC721Extended.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
 import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 
-contract Jobbers is IJobbers, Ownable, Pausable {
+contract Jobber is IJobber, Ownable, Pausable {
   using Address for address;
   using Lib for *;
 
@@ -22,9 +22,6 @@ contract Jobbers is IJobbers, Ownable, Pausable {
 
   //Account to receive fee
   address public feeTo;
-
-  // Fee denominated in stable coin e.g USDT
-  // IERC20 public feeDenom;
 
   ///@dev Membership controller
   ICommon.MembershipBase public mShip;
@@ -62,7 +59,7 @@ contract Jobbers is IJobbers, Ownable, Pausable {
     mShip.upgrader = _upgrader; 
     feeTo = _feeTo;
     jobbers.push();
-    updateFee = 50 ether;
+    updateFee = 5 ether;
   }
 
   receive() external payable {}

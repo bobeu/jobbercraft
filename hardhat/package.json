@@ -4,7 +4,7 @@
     "compile": "npx hardhat compile",
     "test": "npx hardhat test",
     "deploy": "npx hardhat deploy --network hardhat",
-    "deploy-celom": "hardhat deploy --network electro --export deployments/contracts.json"
+    "deploy-testnet": "hardhat deploy --network testnet --export deployments/contracts.json"
   },
   "devDependencies": {
     "@ethersproject/abi": "^5.4.7",

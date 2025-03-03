@@ -292,7 +292,7 @@ abstract contract Storage is IJob {
   }
 
   function _queryJobberStatus(address target) internal virtual view returns(uint8 _return) {
-    _return = IJobbers(jobberContract).queryStatus(target);
+    _return = IJobber(jobberContract).queryStatus(target);
   }
 
   /**@dev Enforces compliance. Jobbers with HiWork Probationary Membership

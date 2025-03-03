@@ -1,23 +1,18 @@
 import { ethers } from "hardhat";
-import * as fs from "fs/promises";
 
 async function main() {
-  // const HiWorkLib = await ethers.getContractFactory("HiWorkLib");
-  // const hiworkLib = await HiWorkLib.deploy();
-  // await hiworkLib.deployed();
-
   const cancellationFee = 10;
   const minimMumOffer = 1_000_000_000_000_000;
   const probationRewardbase = 50;
   const approvedRewardbase = 150;
 
   const initializer = 5;
-  const HiWork = await ethers.getContractFactory("HiWork");
-  const hiwork = await HiWork.deploy(initializer);
-  await hiwork.deployed();
+  const Jobbercraft = await ethers.getContractFactory("JobberCraft");
+  const jcraft = await Jobbercraft.deploy(initializer);
+  await jcraft.deployed();
 
   
-  const hiAddress = hiwork.address;
+  const hiAddress = jcraft.address;
   console.log(`Hiwork deployed to ${hiAddress}`);
 
   const Probation = await ethers.getContractFactory("Probation");
@@ -31,15 +26,15 @@ async function main() {
   await approval.deployed();
   console.log(`Approved deployed to ${approval.address}`);
   
-  const WorkToken = await ethers.getContractFactory("WorkToken");
-  const workToken = await WorkToken.deploy(hiAddress);
-  await workToken.deployed();
-  console.log(`WorkToken deployed to ${workToken.address}`);
+  const Craft = await ethers.getContractFactory("Craft");
+  const craft = await Craft.deploy(hiAddress);
+  await craft.deployed();
+  console.log(`Craft deployed to ${craft.address}`);
   
-  await hiwork.initialize(
+  await jcraft.initialize(
     cancellationFee, 
     minimMumOffer, 
-    workToken.address, 
+    craft.address, 
     probation.address, 
     approval.address,
     probationRewardbase,

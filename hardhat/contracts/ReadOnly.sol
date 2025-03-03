@@ -1,9 +1,10 @@
 /** SPDX-License-Identifier: MIT*/
 pragma solidity 0.8.24;
 
-import "./Storage.sol";
+import { Storage } from "./Storage.sol";
 
 abstract contract ReadOnly is Storage {
+  constructor(address _feeTo) Storage(_feeTo) {}
 
   /**@dev Returns list of interested participants for a job 
           @param jobId - {job index} */
