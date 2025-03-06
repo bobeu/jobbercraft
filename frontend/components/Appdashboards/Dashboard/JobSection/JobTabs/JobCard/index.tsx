@@ -1,16 +1,17 @@
 import React from "react";
-import type { Address, ButtonObj, FormattedJob, FormattedJobContent, TransactionCallback, TxnType } from "@/customTypes";
-import { formatAddr, formatJobContent } from "@/utilities";
-import { JOBSTATUS, JOBTYPE, MOCKJOBS } from "@/constants";
-import { useAccount, useConfig } from "wagmi";
+import type {ButtonObj, FormattedJobContent,} from "@/customTypes";
+// import { formatAddr, formatJobContent } from "@/utilities";
+import { JOBSTATUS, JOBTYPE, } from "@/constants";
+// import { useAccount, useConfig } from "wagmi";
 // import { ActionButton } from "../ActionButton";
 // import { InfoDisplay, Providers } from '../DrawerWrapper';
 // import { renderIcon } from '../Icons';
 // import { PermissionPopUp } from '../PermissionPopUp';
 import { CustomButton } from "@/components/CustomButton";
-import { getContractData } from "@/apis/utils/getContractData";
-import { ActionButton, OtherParam, } from "./ActionButton";
-import useAppStorage from "@/components/StateContextProvider/useAppStorage";
+// import { getContractData } from "@/apis/utils/getContractData";
+import { ActionButton, } from "./ActionButton";
+// import useAppStorage from "@/components/StateContextProvider/useAppStorage";
+import { InfoDisplay, JobbersInfo } from "./ActionButton/JobberInfo/Providers";
 
 // /**
 //  * Filter the data list for current user
@@ -30,33 +31,27 @@ import useAppStorage from "@/components/StateContextProvider/useAppStorage";
 //     return result;
 // }
 
-export const JobCard = ({job, jobId}: {job: FormattedJobContent, jobId: bigint}) => {
+export const JobCard = ({jobDetail, jobId}: {jobDetail: FormattedJobContent, jobId: bigint}) => {
     const [inputModalOn, setInputModal] = React.useState<boolean>(false);
     const [confirmationDrawerOn, setDrawerState] = React.useState<number>(0);
     const [infoDrawer, setShowInfo]= React.useState<number>(0);
     const [providerDrawer, setProviderDrawer]= React.useState<number>(0);
     const[buttonObj, setButtonObj] = React.useState<ButtonObj>({functionName: 'null', buttonText: '',  disable: false});
 
-    const account = formatAddr(useAccount().address);
-    const config = useConfig();
+    // const account = formatAddr(useAccount().address);
+    // const config = useConfig();
     // const { proposedCompletionDate, myBestPrice } = useAppStorage();
     // const callback : TransactionCallback = (arg) => setmessage(arg.message);
 
-    const { jCraft, jobber, tUSDT } = getContractData();
-    // const common = {
-    //     account,
-    //     config,
-    //     // callback,
-    //     jobId
-    // }
+    // const { jCraft, jobber, tUSDT } = getContractData();
     const { 
-        curator,
-        job: { datePosted, hirer, jStatus, jobRef, jobType, offerPrice, proposeEnd, title},
+        // curator,
+        job: { datePosted, jStatus, jobRef, jobType, offerPrice, proposeEnd, title},
         requests,
-        tags,
+        // tags,
         isCollab,
         isHirer
-    } = job;
+    } = jobDetail;
     const status = JOBSTATUS[jStatus]
     // const otherParam : OtherParam = {
     //     request_TWK: {...common, myBestPrice: BigInt(myBestPrice), proposedCompletionDateInDays: Number(proposedCompletionDate) },
@@ -155,7 +150,7 @@ export const JobCard = ({job, jobId}: {job: FormattedJobContent, jobId: bigint})
                         <ActionButton
                             {
                                 ...{
-                                    ...job,
+                                    ...jobDetail,
                                     jobId: BigInt(jobId),
                                     buttonObj,
                                     inputModalOn,
@@ -170,32 +165,30 @@ export const JobCard = ({job, jobId}: {job: FormattedJobContent, jobId: bigint})
                     </div>
                 </div>
             </div>
-            <Providers
-                isAdmin={isAdmin}
+            <JobbersInfo
                 popUpDrawer={providerDrawer}
                 toggleDrawer={showProviderDetails}
-                cData_formatted={cData_formatted} 
+                jobber_formatted={requests}
             />
             {
                 (!confirmationDrawerOn && !inputModalOn) && 
                     <InfoDisplay 
-                        formattedPool={formattedPool} 
+                        formattedJob={jobDetail}
                         popUpDrawer={infoDrawer}
                         toggleDrawer={(arg) => setShowInfo(arg)}
                         actions={
                             <ActionButton 
                                 {
                                     ...{
-                                        sentQuota,
-                                        loan_InBN,
-                                        payDate_InSec,
-                                        otherParam,
+                                        ...jobDetail,
+                                        jobId: BigInt(jobId),
                                         buttonObj,
-                                        ...formattedPool,
                                         inputModalOn,
+                                        hirerOffer: offerPrice,
+                                        functionName: "becomeAJobber",
                                         confirmationDrawerOn,
-                                        setDrawerState: (arg:number) => setDrawerState(arg),
-                                        setInputModal: (arg:boolean) => setInputModal(arg)
+                                        setDrawerState: (arg: number) => setDrawerState(arg),
+                                        setInputModal: (arg: boolean) => setInputModal(arg),
                                     }
                                 }
                             />

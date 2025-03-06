@@ -2,6 +2,7 @@ import assert from "assert";
 import BigNumber from "bignumber.js";
 import { 
   Address, 
+  AllJobs, 
   FormattedJob, 
   FormattedJobberContent, 
   FormattedJobContent, 
@@ -104,20 +105,20 @@ const formattedJobber = (data: Jobber) : FormattedJobberContent => {
     acceptance: data.acceptance,
     identifier: formatAddr(data.identifier),
     myBestPrice: formatEther(data.myBestPrice),
-    proposedJobEnd: data.proposedJobEnd,
+    proposedJobEnd: toBN(data.proposedJobEnd.toString()).toNumber(),
     signed: data.signed
   }
 }
 
 const formatJob = (data: Metadata) : FormattedJob => {
   return {
-    datePosted: data.datePosted,
+    datePosted: toBN(data.datePosted.toString()).toNumber(),
     hirer: formatAddr(data.hirer),
     jobRef: data.jobRef,
     jobType: data.jobType,
     jStatus: data.jStatus,
     offerPrice: toBN(formatEther(data.offerPrice)).decimalPlaces(0).toString(),
-    proposeEnd: data.proposeEnd,
+    proposeEnd: toBN(data.proposeEnd.toString()).toNumber(),
     signature: data.signature,
     title: data.title
   }
@@ -128,7 +129,7 @@ const formatJob = (data: Metadata) : FormattedJob => {
  * @param jobMetadata : Job metadata array
  * @returns : Formatted data
 */
-export const formatJobContent = (jobMetadata: JobMetadata[], currentUser: Address) : {userJob: FormattedJobContent[], result: FormattedJobContent[]} => {
+export const formatJobContent = (jobMetadata: AllJobs, currentUser: Address) : {userJob: FormattedJobContent[], result: FormattedJobContent[]} => {
   let userJob : FormattedJobContent[] = [];
   const result = jobMetadata.map((item) => {
     const {
@@ -149,7 +150,9 @@ export const formatJobContent = (jobMetadata: JobMetadata[], currentUser: Addres
       curator: formatAddr(curator),
       job: formatJob(job),
       requests: [],
-      tags,
+      tags: tags.map((tag) => {
+        return tag.toString();
+      }),
       isCollab: false,
       isHirer: job.hirer.toLowerCase() === currentUser.toLowerCase()
     }

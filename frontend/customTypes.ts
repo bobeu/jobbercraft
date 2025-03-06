@@ -1,7 +1,7 @@
 import BigNumber from "bignumber.js";
 
 export type WagmiConfig = import("wagmi").Config;
-export type AllJobs = JobMetadata[];
+export type AllJobs = Readonly<JobMetadata[]>;
 export type Str = string;
 export type Address = `0x${string}`;
 export type Bignumber = BigNumber | string | number;
@@ -50,7 +50,7 @@ export interface JobberData {
 }  
 
 
-export type Profile = JobberData[];
+export type Profile = Readonly<JobberData[]>;
 export interface ContractReceipt {
   hash?: string;
   from?: string;
@@ -80,30 +80,30 @@ export enum JobType {
 }
 
 export interface Metadata {
-  jobType: JobType;
-  title: string;
-  jobRef: string;
+  jobType: number;
+  title: Address;
+  jobRef: Address;
   signature: number;
-  datePosted: number;
-  proposeEnd: number;
+  datePosted: bigint;
+  proposeEnd: bigint;
   offerPrice: bigint;
-  hirer: string;
-  jStatus: JobStatus;
+  hirer: Address;
+  jStatus: number;
 };
 
 export interface Jobber {
-  proposedJobEnd: number;
+  proposedJobEnd: bigint;
   myBestPrice: bigint;
-  identifier: string;
+  identifier: Address;
   signed: boolean;
   acceptance: boolean;
 };
 
 export interface JobMetadata {
   job: Metadata;
-  requests: Jobber[];
-  tags: string[];
-  curator: string;
+  requests: Readonly<Jobber[]>;
+  tags: Readonly<Address[]>;
+  curator: Address;
 }
 
 export interface ReadContractProps {

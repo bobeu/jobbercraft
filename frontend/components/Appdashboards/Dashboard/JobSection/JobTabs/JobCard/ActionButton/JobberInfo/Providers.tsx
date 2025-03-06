@@ -1,22 +1,19 @@
 import React from "react";
 import { flexSpread, } from "@/constants";
-import { Provider } from '.';
+import { JobberInfo } from '.';
 import AddressWrapper from "@/components/AddressFormatter/AddressWrapper";
-import { Address, FormattedJob, FormattedJobberContent, FormattedJobContent, } from "@/customTypes";
+import { Address, FormattedJobberContent, FormattedJobContent, } from "@/customTypes";
 import { formatAddr, } from "@/utilities";
-import { useAccount } from "wagmi";
 import Button from '@mui/material/Button';
-// import { getContractData } from "@/apis/utils/getContractData";
 import Drawer from "../Confirmation/Drawer";
 
 const BOXSTYLING = "h-[180px] lg:h-[150px] w-full rounded-lg border border-white1/20 p-4 space-y-2 text-orange-200 bg-white1/10";
 
 export const InfoDisplay = ({ formattedJob, actions, popUpDrawer, toggleDrawer } : InfoDisplayProps) => {
-    const { address } = useAccount();
     const {
         curator,
-        isCollab,
-        isHirer,
+        // isCollab,
+        // isHirer,
         job: { hirer },
         requests,
         tags
@@ -98,11 +95,10 @@ export const JobbersInfo: React.FC<ProvidersProps> = ({toggleDrawer, popUpDrawer
             <React.Fragment>
                 {
                     jobber_formatted.map((data, i) => (
-                        <Provider
+                        <JobberInfo
                             formattedData={data}
                             key={i} 
                             index={i}
-                            isAdmin={isAdmin}
                         />
                     ))
                 }

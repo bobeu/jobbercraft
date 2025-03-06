@@ -2,8 +2,6 @@ import React from "react";
 import { flexSpread } from "@/constants";
 import AddressWrapper from "@/components/AddressFormatter/AddressWrapper";
 import Collapse from "@mui/material/Collapse";
-import { getContractData } from "@/apis/utils/getContractData";
-import { useAccount } from "wagmi";
 import { FormattedJobberContent } from "@/customTypes";
 import { Chevron } from "@/components/Collapsible";
 import { getTimeFromEpoch } from "@/utilities";
@@ -11,7 +9,6 @@ import { getTimeFromEpoch } from "@/utilities";
 export const JobberInfo = ({ formattedData, index }: ProviderProps) => {
     const [open, setOpen] = React.useState<boolean>(false);
     const handleCollapse = () => setOpen(!open);
-    const { chainId } = useAccount();
 
     const { 
         acceptance,
@@ -46,36 +43,14 @@ export const JobberInfo = ({ formattedData, index }: ProviderProps) => {
                         <h3>{getTimeFromEpoch(proposedJobEnd)}</h3>
                     </li>
                     <li className={`${flexSpread}`}>
-                        <h3>Loan Bal</h3>
-                        <h3>{`${loan_InEther} USDT`}</h3>
-                    </li>
-                    <li className={`${flexSpread}`}>
-                        <h3>{'Max. Date To Payback'}</h3>
-                        <h3 className="text-end">{ payDate_InDateFormat }</h3>
-                    </li>
-                    <li className={`${flexSpread}`}>
-                        <h3>{"Col-Bal"}</h3>
-                        <h3>{`${colBals_InEther} ${currency}`}</h3>
-                    </li>
-                    <li className={`${flexSpread}`}>
-                        <h3>Interest Accrued</h3>
-                        <h3>{`${expInterest_InEther} ${currency}`}</h3>
+                        <h3>Signed job completion</h3>
+                        <h3>{`${signed? 'Signed' : 'Not Signed'} USDT`}</h3>
                     </li>
                 </ul>
             </Collapse>
         </div>
     );
 }
-
-const adminBadge = (isAdmin: boolean) => {
-    return(
-        <span hidden={!isAdmin} >
-            <svg xmlns="http://www.w3.org/2000/svg" fill="#F87C00" viewBox="0 0 20 20" strokeWidth={1.5} stroke="currentColor" className="size-4">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
-            </svg>
-        </span>
-    );
-};
 
 interface ProviderProps {
     formattedData: FormattedJobberContent;

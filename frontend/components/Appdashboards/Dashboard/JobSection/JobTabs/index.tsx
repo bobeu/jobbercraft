@@ -10,6 +10,8 @@ import { motion } from 'framer-motion';
 import getReadFunctions from '@/components/readContractConfig';
 import { Loading } from './Nulls';
 import { JobCard } from './JobCard';
+import { formatJobContent } from '@/utilities';
+import { zeroAddress } from 'viem';
 // import CreateAvatar from './CreateAvatar';
 
 type TabPosition = 'left' | 'right' | 'top' | 'bottom';
@@ -73,7 +75,7 @@ const JobTabs = () => {
     <section className='h-[100vh] m-4'>
       <Grid container xs={'auto'}>
         {
-          MOCKJOBS.map((job, index) => (
+          formatJobContent(data || MOCKJOBS, address || zeroAddress).result.map((job, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <motion.button
                 initial={{opacity: 0}}
@@ -81,7 +83,7 @@ const JobTabs = () => {
                 transition={{duration: '0.5', delay: index/MOCKJOBS.length}}
                 className='w-full rounded-md cursor-pointer' 
               >
-                { isPending? <Loading /> : data? null : <JobCard { ...{...data! }} /> }
+                { isPending? <Loading /> : data? null : <JobCard { ...{ jobDetail: job, jobId: BigInt(index) }} /> }
               </motion.button>
             </Grid>
           ))
