@@ -1,5 +1,5 @@
 import { CONFIRMATIONS } from "@/constants";
-import { Address, TransactionCallback, WagmiConfig } from "@/interfaces";
+import { Address, TransactionCallback, WagmiConfig } from "@/customTypes";
 import { waitForTransactionReceipt } from "wagmi/actions";
 
 export const waitForConfirmation = async(

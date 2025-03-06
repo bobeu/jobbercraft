@@ -1,29 +1,43 @@
+import "@rainbow-me/rainbowkit/styles.css"
+import '../styles/globals.css'
 import React from 'react';
-import '../styles/globals.css';
-import '@rainbow-me/rainbowkit/styles.css';
+import NextHead from 'next/head'
 import type { AppProps } from 'next/app';
-import AppProvider from '../components/AppProvider';
-import ErrorBoundary from '@/components/ErrorBoundary';
-import SEOHead from '@/components/SEOHead';
-import Layout from '@/components/Layout';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+import store from '@/components/configs/StoreConfig';
+import { BrowserRouter } from "react-router-dom";
+import {Provider as ReduxProvider} from 'react-redux';
+import ScopedCssBaseline from "@mui/material/ScopedCssBaseline";
+import { AppThemeProvider } from "@/components/AppThemeProvider";
+import AppProvider from "@/components/AppProvider";
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [isMounted, setMount] = React.useState(false);
-  React.useEffect(() => setMount(true), []);
+  const [isMounted, mount] = React.useState(false);
 
-  return (
+  React.useEffect(() => {
+    mount(true);
+  }, []);
+  // if(typeof window === 'undefined') return null;
+  return isMounted? (
     <React.Fragment>
-      <SEOHead url={undefined} />
+      <NextHead>
+        <title>JobberCraft</title>
+      </NextHead>
         {
-          isMounted? 
-            <ErrorBoundary fallback={<p>Something went wrong</p>}>
-              <AppProvider>
-                <Layout>
-                  <Component {...pageProps}/>
-                </Layout> 
-              </AppProvider>
-            </ErrorBoundary> : null
+          isMounted &&
+            <BrowserRouter>
+              <AppThemeProvider>
+                <ReduxProvider store={store}>
+                  <ScopedCssBaseline enableColorScheme />
+                  <AppProvider>
+                    <Component {...pageProps} />
+                  </AppProvider>
+                </ReduxProvider>
+              </AppThemeProvider>
+            </BrowserRouter>
         }
-      </React.Fragment>
-    );
+    </React.Fragment>
+  ) : null;
 }
+

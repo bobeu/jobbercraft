@@ -156,7 +156,7 @@ contract Jobber is IJobber, Ownable, Pausable {
   }
 
   /**@dev Jobbers can only update field, profileURI and avatar after sign up
-    It costs them something to do that
+    It costs something to do that
    */
   function updateProfileInfo(string memory field, string memory profileURI, string memory avatar) external payable returns(bool) {
     address caller = _msgSender();

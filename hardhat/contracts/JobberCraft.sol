@@ -356,7 +356,7 @@ contract JobberCraft is ReadOnly, Pausable, Curators {
   function unpause() public onlyOwner { _unpause(); }
 
     /**
-    @dev Reset cancellation fee.
+    @dev Update cancellation fee.
         Note - Owner's privilege.
         @param newRate - Cancellation rate.
          Rate should not be greater than 100%.
@@ -369,7 +369,6 @@ contract JobberCraft is ReadOnly, Pausable, Curators {
   function _beforeInvocation() internal view override {
     require(_msgSender() == owner(), "17");
   }
-
 }
 
 

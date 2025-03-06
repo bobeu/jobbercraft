@@ -1,21 +1,8 @@
 import { zeroAddress } from 'viem';
-import { Analytics, FormattedData, LiquidityPool, Profile } from './interfaces';
+import { Profile } from './customTypes';
 import BigNumber from 'bignumber.js';
-import type { SafeVersion } from '@safe-global/types-kit';
+import { JobMetadata, JobStatus, JobType } from './customTypes';
 
-export enum FuncTag { 
-  JOIN,
-  GET, 
-  PAYBACK, 
-  WITHDRAW,
-  CANCELED,
-  ENDED
-}
-export const SAFE_VERSION : SafeVersion = '1.4.1';
-export enum ROUTER { PERMISSIONLESS, PERMISSIONED }
-export const DRAWERWIDTH = 240;
-export const ZERO_ADDR = zeroAddress;
-export const STRINGS = ["Decentralized", "Secure", "Permissionless"];
 export const INIT_ZOOM = '0%';
 export const DEFAULT_ANIMATION_STEPS = ['50%', '100%'];
 export const CONFIRMATIONS = 3; // 3 blocks
@@ -24,65 +11,313 @@ export const flexStart = "flex justify-start items-center";
 export const flexEnd = "flex justify-end items-center";
 export const flexSpread = "flex justify-between items-center";
 export const flexEven = "flex justify-evenly items-center";
-export const ANALYTICS : Analytics = {
-  tvlInXFI: 0n,
-  tvlInUsd: 0n,
-  totalPermissioned: 0n,
-  totalPermissionless: 0n
-}
-
-export const PROFILE_MOCK : Profile = {
-  id: zeroAddress,
-  payDate: 0n,
-  colBals: 0n,
-  expInterest: 0n,
-  durOfChoice: 0n,
-  turnTime: 0n,
-  loan: 0n,
-  sentQuota: false
-};
-
-export const POOL_MOCK : LiquidityPool = {
-  uint256s: {
-    unit: 0n,
-    currentPool: 0n,
-    fullInterest: 0n,
-    intPerSec: 0n,
-    unitId: 0n,
-    rId: 0n
+export const JOBSTATUS = ['NULL', 'OPEN', 'TAKEN', 'COMPLETED', 'CLOSED'];
+export const JOBTYPE = ['ONEOFF', 'PARTTIME', 'FULLTIME'];
+export const MOCKJOBS: JobMetadata[] = [
+  {
+    tags: ["DESIGN", "PHOTOSHOP", "ADOBE"],
+    curator: "Curator-Address",
+    job: {
+      title: "Graphic designer",
+      jobType: JobType.ONEOFF,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.OPEN
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false,
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
   },
-  stage: 0n,
-  uints: {
-    intRate: 0n,
-    quorum: 0n,
-    selector: 0n,
-    colCoverage: 0n,
-    duration: 0n,
-    cSlot: 0n,
-    allGh: 0n,
-    userCount: 0n
+  {
+    tags: ["DESIGN", "PHOTOSHOP", "ADOBE"],
+    curator: "Curator Address",
+    job: {
+      title: "Content designer",
+      jobType: JobType.FULLTIME,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.TAKEN
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
   },
-  addrs: {
-    lastPaid: zeroAddress,
-    admin: zeroAddress,
-    asset: zeroAddress,
-    bank: zeroAddress,
+  {
+    tags: ["BACKEND", "SMARTCONTRACTS", "WEB3"],
+    curator: "Curator Address",
+    job: {
+      title: "Smart Contract developer",
+      jobType: JobType.ONEOFF,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.COMPLETED
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
   },
-  router: 'PERMISSIONLESS',
-  status: 0n
-}
+  {
+    tags: ["BACKEND", "SMARTCONTRACTS", "WEB3"],
+    curator: "Curator Address",
+    job: {
+      title: "Smart Contract editor",
+      jobType: JobType.ONEOFF,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.NULL
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
+  },
 
-export const FORMATTEDDATA_MOCK : FormattedData = {
-  payDate_InDateFormat: '',
-  payDate_InSec: 0,
-  turnTime_InDateFormat: '',
-  turnTime_InSec: 0,
-  durOfChoice_InSec: 0,
-  colBals_InEther: '',
-  loan_InEther: '',
-  expInterest_InEther: '',
-  id_lowerCase: '',
-  id_toString: '',
-  loan_InBN: new BigNumber(0),
-  sentQuota: false
-}
+  {
+    tags: ["BUSINESS", "FINANCE"],
+    curator: "Curator Address",
+    job: {
+      title: "Financial analyst",
+      jobType: JobType.ONEOFF,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.TAKEN
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
+  },
+
+  {
+    tags: ["HEALTH"],
+    curator: "Curator Address",
+    job: {
+      title: "Health Advisor",
+      jobType: JobType.PARTTIME,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.CLOSED
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
+  },
+  {
+    tags: ["HEALTH"],
+    curator: "Curator Address",
+    job: {
+      title: "Nutritionist",
+      jobType: JobType.ONEOFF,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.OPEN
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
+  },
+  {
+    tags: ["ART"],
+    curator: "Curator Address",
+    job: {
+      title: "Photography coach",
+      jobType: JobType.PARTTIME,
+      jobRef: "https://linktojobdescription",
+      signature: 0,
+      datePosted: new Date().getTime(),
+      proposeEnd: 60 * 60 * 24 * 5,
+      offerPrice: BigInt(`100${"0".repeat(18)}`),
+      hirer: "Hirer Address",
+      jStatus: JobStatus.OPEN
+    },
+    requests: [
+      {
+        acceptance: false,
+        identifier: "jobber1",
+        myBestPrice: BigInt(`120${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 6,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber2",
+        myBestPrice: BigInt(`110${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 4,
+        signed: false
+      },
+      {
+        acceptance: false,
+        identifier: "jobber3",
+        myBestPrice: BigInt(`150${"0".repeat(18)}`),
+        proposedJobEnd: 60 * 60 * 24 * 5,
+        signed: false
+      }
+    ]
+  }
+];

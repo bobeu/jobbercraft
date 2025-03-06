@@ -1,13 +1,38 @@
 import BigNumber from "bignumber.js";
-// import { ContractReceipt, ethers } from "ethers";
 
+export type WagmiConfig = import("wagmi").Config;
 export type AllJobs = JobMetadata[];
-export type Address = string;
+export type Str = string;
+export type Address = `0x${string}`;
 export type Bignumber = BigNumber | string | number;
 export type SwitchChainReturn = number;
-export type ContractType = import('ethers').Contract;
-export type Connector = import('wagmi').Connector<any, any> | undefined;
 export enum Tier { NONE, PROBATION, APPROVED }
+export type TrxResult = 'success' | 'reverted';
+export type TxnType = 'null' | 'postJob' | 'requestToWork' | 'becomeAJobber' | 'approveRequestToWork' | 'approveCompletion' | 'cancel' | 'submitAndSignCompletion'
+export type TransactionCallback = (arg: TrxState) => void;
+export type Path = 'onboard' | 'jobber' | 'hirer';
+export type VoidFunc = () => void;
+export type DrawerAnchor = 'confirmation' | 'jobdetails' | 'jobbers' | '';
+export type ToggleDrawer = (value: number, setState: (value: number) => void) => (event: React.KeyboardEvent | React.MouseEvent) => void;
+
+export interface ButtonObj {
+  functionName: TxnType;
+  buttonText: string;
+  disable: boolean;
+  displayMessage?: string;
+}
+
+export interface TrxState {
+  status?: TrxResult;
+  message: string;
+}
+
+export interface Config {
+  config: WagmiConfig;
+  account: Address;
+  value?: bigint;
+  callback?: TransactionCallback; 
+}
 
 export interface Other {
   name: string;
@@ -61,14 +86,14 @@ export interface Metadata {
   signature: number;
   datePosted: number;
   proposeEnd: number;
-  offerPrice: BigNumber;
+  offerPrice: bigint;
   hirer: string;
   jStatus: JobStatus;
 };
 
 export interface Jobber {
   proposedJobEnd: number;
-  myBestPrice: BigNumber;
+  myBestPrice: bigint;
   identifier: string;
   signed: boolean;
   acceptance: boolean;
@@ -100,41 +125,41 @@ export interface ConfigureAndWriteTransactionProps {
   // selector: number;
 };
 
-export interface PostJob {
+export interface PostJob extends Config {
   jobType: number;
   title: string;
-  tags: string;
+  tags: string[];
   jobRef: string; 
   proposedEndDateInDays: number, 
-  offerPrice: string; 
-  curatorId: number;
+  offerPrice: bigint; 
+  curatorId: bigint;
 }
 
-export interface RequestToWork {
-  jobId: Bignumber; 
+export interface RequestToWork extends Config {
+  jobId: bigint; 
   proposedCompletionDateInDays: number; 
-  myBestPrice: Bignumber;
+  myBestPrice: bigint;
 }
 
-export interface ApproveRequests {
-  jobId: Bignumber; 
+export interface ApproveRequests extends Config {
+  jobId: bigint; 
   selectedPositions: number[];
 }
 
-export interface SubmitAndSignCompletion {
-  jobId: Bignumber; 
-  selectedPositions: number[];
+export interface SubmitAndSignCompletion extends Config {
+  jobId: bigint; 
+  // selectedPositions: number[];
 }
 
-export interface ApproveCompletion {
-  jobId: Bignumber; 
+export interface ApproveCompletion extends Config {
+  jobId: bigint; 
 }
 
-export interface CancelJob {
-  jobId: Bignumber; 
+export interface CancelJob extends Config {
+  jobId: bigint; 
 }
 
-export interface BecomeAJobber {
+export interface BecomeAJobber extends Config {
   name: string;
   aka: string;
   field: string;
@@ -142,27 +167,21 @@ export interface BecomeAJobber {
   avatarUrl: string;
 }
 
-export interface RunTransactionProps {
-  functionName: string | undefined;
-  // erc20Addr?: string; 
-  chainId?: number;
-  // abi?: any;
+export interface HandleTransactionParam {
+  functionName: TxnType;
   account: string;
-  erc20Addr?: string;
-  selector?: number;
-  connector?: Connector;
-  pjb?: PostJob;
-  rtw?: RequestToWork;
-  apr?: ApproveRequests;
-  sasc?: SubmitAndSignCompletion;
-  apc?: ApproveCompletion;
-  cj?: CancelJob;
-  baj?: BecomeAJobber;
+  post_JOB?: PostJob;
+  request_TWK?: RequestToWork;
+  approve_RQS?: ApproveRequests;
+  submit_ASC?: SubmitAndSignCompletion;
+  approve_CMP?: ApproveCompletion;
+  cancel_JOB?: CancelJob;
+  become_JOBBER?: BecomeAJobber;
 }
 
 
 export interface OptionProps {
-  connector: Connector;
+  // connector: Connector;
   chainId?: number;
   account: string;
   erc20Addr: string;
@@ -173,311 +192,32 @@ export interface OptionProps {
   methodType: string;
 }
 
-export const MOCKJOBS: JobMetadata[] = [
-  {
-    tags: ["DESIGN", "PHOTOSHOP", "ADOBE"],
-    curator: "Curator-Address",
-    job: {
-      title: "Graphic designer",
-      jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.OPEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false,
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  },
-  {
-    tags: ["DESIGN", "PHOTOSHOP", "ADOBE"],
-    curator: "Curator Address",
-    job: {
-      title: "Content designer",
-      jobType: JobType.FULLTIME,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.TAKEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  },
-  {
-    tags: ["BACKEND", "SMARTCONTRACTS", "WEB3"],
-    curator: "Curator Address",
-    job: {
-      title: "Smart Contract developer",
-      jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.COMPLETED
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  },
-  {
-    tags: ["BACKEND", "SMARTCONTRACTS", "WEB3"],
-    curator: "Curator Address",
-    job: {
-      title: "Smart Contract editor",
-      jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.NULL
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  },
+export interface FormattedJob {
+  jobType: number;
+  title: string;
+  jobRef: string;
+  signature: number;
+  datePosted: number;
+  proposeEnd: number;
+  offerPrice: string;
+  hirer: string;
+  jStatus: number;
+}
 
-  {
-    tags: ["BUSINESS", "FINANCE"],
-    curator: "Curator Address",
-    job: {
-      title: "Financial analyst",
-      jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.TAKEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  },
+export interface FormattedJobContent {
+  job: FormattedJob;
+  requests: FormattedJobberContent[];
+  tags: string[];
+  curator: string;
+  isCollab: boolean;
+  isHirer: boolean;
+}
 
-  {
-    tags: ["HEALTH"],
-    curator: "Curator Address",
-    job: {
-      title: "Health Advisor",
-      jobType: JobType.PARTTIME,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.CLOSED
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  },
-  {
-    tags: ["HEALTH"],
-    curator: "Curator Address",
-    job: {
-      title: "Nutritionist",
-      jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.OPEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  },
-  {
-    tags: ["ART"],
-    curator: "Curator Address",
-    job: {
-      title: "Photography coach",
-      jobType: JobType.PARTTIME,
-      jobRef: "https://linktojobdescription",
-      signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
-      offerPrice: BigNumber(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
-      jStatus: JobStatus.OPEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: "jobber1",
-        myBestPrice: BigNumber(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber2",
-        myBestPrice: BigNumber(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: "jobber3",
-        myBestPrice: BigNumber(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
-        signed: false
-      }
-    ]
-  }
-];
+export interface FormattedJobberContent {
+  proposedJobEnd: number;
+  myBestPrice: string;
+  identifier: string;
+  signed: boolean;
+  acceptance: boolean;
+}
+

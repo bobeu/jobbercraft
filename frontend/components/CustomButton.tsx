@@ -1,4 +1,3 @@
-import { VoidFunc } from "@/interfaces";
 import React from "react";
 
 export const CustomButton: 
@@ -15,7 +14,7 @@ export const CustomButton:
         <button 
             disabled={disabled}
             onClick={handleButtonClick}
-            className={`w-full py-3 px-2 uppercase text-xs flex justify-center items-center hover:shadow-sm hover:shadow-orange-200 focus:shadow-sm focus:shadow-200 ${overrideClassName}`}
+            className={`py-3 px-2 uppercase flex justify-center items-center hover:shadow-sm hover:shadow-orange-200 focus:shadow-sm focus:shadow-200 ${overrideClassName}`}
         >
             { children }
         </button>
@@ -24,7 +23,7 @@ export const CustomButton:
 
 interface CustomButtonProps {
     overrideClassName?: string;
-    handleButtonClick: VoidFunc;
+    handleButtonClick: ()=> void;
     disabled: boolean;
     children: React.ReactNode;
 }

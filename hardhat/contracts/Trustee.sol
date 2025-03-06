@@ -74,7 +74,7 @@ contract Trustee is ITrustee, Ownable, ReentrancyGuard {
     return true;
   }
   
-  function _getCUSDAddr() private view returns(address _token) {
+  function _getTUSDAddr() private view returns(address _token) {
     _token = tESTUSDT;
   }
 
@@ -92,12 +92,12 @@ contract Trustee is ITrustee, Ownable, ReentrancyGuard {
   }
 
   function _withdraw(address to, uint amount) private {
-    require(IERC20(_getCUSDAddr()).transfer(to, amount), 'Trustee: Withdrawal failed');
+    require(IERC20(_getTUSDAddr()).transfer(to, amount), 'Trustee: Withdrawal failed');
   
   }
 
   function _getBalances() internal view returns(uint _balances) {
-    address token = _getCUSDAddr();
+    address token = _getTUSDAddr();
     _balances = IERC20(token).balanceOf(address(this));
   } 
 

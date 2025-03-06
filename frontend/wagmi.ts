@@ -16,9 +16,7 @@
 // import "@rainbow-me/rainbowkit/styles.css"
 import { configureChains, createConfig } from 'wagmi'
 // import { celoAlfajores, celo } from 'wagmi/chains'
-import { Alfajores, Celo } from "@celo/rainbowkit-celo/chains";
 // import { RainbowKitProvider } from "@rainbow-me/rainbowkit";
-import { InjectedConnector } from 'wagmi/connectors/injected'
 // import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { publicProvider } from 'wagmi/providers/public'
 import { getDefaultConfig } from 'connectkit';
