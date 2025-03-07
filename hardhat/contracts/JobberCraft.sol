@@ -65,7 +65,7 @@ contract JobberCraft is ReadOnly, Pausable, Curators {
    * @param _initializer : Used to set initial parameters. 
    *  The parameters can only be altered the number of times the _initializer was set.
   */
-  constructor (uint8 _initializer, address _feeTo) ReadOnly(_feeTo) { 
+  constructor (uint8 _initializer, address _feeTo, address token, address _jobberContract) ReadOnly(_feeTo, token, _jobberContract) { 
     initializer = _initializer; 
   }
 
@@ -118,8 +118,8 @@ contract JobberCraft is ReadOnly, Pausable, Curators {
       .getAllowance(_msgSender(), address(this))
         .uint256GE(minimMumOffer, '14', 0)
           .uint256GE(offerPrice, '14', 1)
-            .uint256G(1e18, '14', 0)
-              .spendAllowance(paymentCurrency, _msgSender(), _trustee);
+            .spendAllowance(paymentCurrency, _msgSender(), _trustee);
+            // .uint256G(1e18, '14', 0)
 
     unchecked {
       offerPrice = offerPrice - 1e18;

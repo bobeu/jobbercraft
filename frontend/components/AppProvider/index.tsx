@@ -20,13 +20,14 @@ const electroneum_testnet : Chain = {
   blockExplorers: {
     default: {
       name: "ETN",
-      url: ""
+      url: "https://blockexplorer.electroneum.com/"
     }
   },
   rpcUrls: {
     default: {
-      http: ["https://rpc.ankr.com/electroneum_testnet", "https://testnet-rpc.electroneum.com"],
+      http: ["https://rpc.ankr.com/electroneum_testnet",`https://rpc.ankr.com/electroneum_testnet/${process.env.NEXT_PUBLIC_ANKR_API_KEY}`],
       webSocket: []
+      // "https://rpc.ankr.com/electroneum_testnet", 
     }
   }
 }

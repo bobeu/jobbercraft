@@ -12,7 +12,8 @@ import { CustomButton } from "@/components/CustomButton";
 import { ActionButton, } from "./ActionButton";
 // import useAppStorage from "@/components/StateContextProvider/useAppStorage";
 import { InfoDisplay, JobbersInfo } from "./ActionButton/JobberInfo/JobbersInfo";
-import { getTimeFromEpoch } from "@/utilities";
+import { formatAddr, getTimeFromEpoch } from "@/utilities";
+import { hexToString } from "viem";
 
 // /**
 //  * Filter the data list for current user
@@ -116,7 +117,7 @@ export const JobCard = ({jobDetail, jobId}: {jobDetail: FormattedJobContent, job
                 <div className="text-cyan-100 font-medium">
                     <span className="flex items-center gap-2 text-lg font-semibold text-cyan-500">
                         {/* <h1>{'Title:'}</h1> */}
-                        <h1>{title}</h1>
+                        <h1>{'Frontend Developer'}</h1>
                     </span>
                     <div className="flex items-center gap-2">
                         <h3>{'Posted:'}</h3>

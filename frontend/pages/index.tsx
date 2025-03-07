@@ -7,6 +7,7 @@ import LoadingModal from "@/components/common/LoadingModal";
 import useLoadingModal from "@/components/hooks/useLoadingModal";
 import LoadingIndicator from "@/components/common/LoadingIndicator";
 import { StorageContextProvider } from "@/components/StateContextProvider";
+import Notification from "@/components/Notification";
 
 export default function Home() {
   const [myBestPrice, setPreferredOffer] = React.useState<string>('0');
@@ -38,6 +39,7 @@ export default function Home() {
       <LoadingContent>
         <Suspense>
           <App />
+          <Notification message={message} />
         </Suspense>
       </LoadingContent>
       <LoadingModal open={isLoadingModal}><LoadingIndicator /></LoadingModal>

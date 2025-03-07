@@ -4,7 +4,7 @@ pragma solidity 0.8.24;
 import { Storage } from "./Storage.sol";
 
 abstract contract ReadOnly is Storage {
-  constructor(address _feeTo) Storage(_feeTo) {}
+  constructor(address _feeTo, address token, address _jobberContract) Storage(_feeTo, token, _jobberContract) {}
 
   /**@dev Returns list of interested participants for a job 
           @param jobId - {job index} */

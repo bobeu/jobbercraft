@@ -39,8 +39,8 @@ describe("JobberCraft test", function () {
 
     // Deploy test stable token
     const TestcUSD = await ethers.getContractFactory("TestUSDT");
-    const testcUSD = await TestcUSD.deploy();
-    await testcUSD.deployed();
+    const testUSD = await TestcUSD.deploy([]);
+    await testUSD.deployed();
 
     // Fee receiver contract
     const FeeTo = await ethers.getContractFactory("FeeTo");
@@ -54,7 +54,7 @@ describe("JobberCraft test", function () {
 
     // Deploy Jobbercraft contract
     const JobberCraft = await ethers.getContractFactory("JobberCraft");
-    const jCraft = await JobberCraft.deploy(INITIALIZER, feeTo.address);
+    const jCraft = await JobberCraft.deploy(INITIALIZER, feeTo.address, testUSD.address, jobbers.address);
     await jCraft.deployed();
 
     const hiAddress = jCraft.address;
@@ -67,7 +67,7 @@ describe("JobberCraft test", function () {
     await jobbers.updateMembershipInfo(0, upgrader.address, 0);
    
     const mintTestcUSD = async (to: string, amount: string) => {
-      await testcUSD.mint(to, amount);
+      await testUSD.mint(to, amount);
     };
 
     const signUpCurators = async () => {
@@ -129,7 +129,7 @@ describe("JobberCraft test", function () {
       for (let i = 0; i < froms.length; i++) {
         const d = data[i];
         // await mintTestcUSD(froms[i].address, SIGNUP_FEE);
-        // await testcUSD.connect(froms[i]).approve(jobbers.address, SIGNUP_FEE);
+        // await testUSD.connect(froms[i]).approve(jobbers.address, SIGNUP_FEE);
         await jobbers.connect(froms[i]).becomeAJobber(d.name, d.aka, d.field, d.profileUrl, d.avatar, {value: SIGNUP_FEE});
       }
       return JOBBER_FEE;
@@ -163,7 +163,7 @@ describe("JobberCraft test", function () {
     };
 
     // initializes contract state
-    await jCraft.initialize(CANCELLATION_FEE_RATE, MINIMUM_OFFER, testcUSD.address, jobbers.address);
+    await jCraft.initialize(CANCELLATION_FEE_RATE, MINIMUM_OFFER, testUSD.address, jobbers.address);
 
     return {
       deployer,
@@ -178,7 +178,7 @@ describe("JobberCraft test", function () {
       feeTo,
       hirer,
       hiAddress,
-      testcUSD,
+      testUSD,
       JOB_REF,
       PROPOSED_END_DATE_IN_DAYS,
       OFFERPRICE,
@@ -247,7 +247,7 @@ describe("JobberCraft test", function () {
     });
 
     it("Should revert if offered is less than the minimum offer", async function () {
-      const { hirer, signUpCurators, jCraft, testcUSD,  } = await loadFixture(deployContractsFixture);
+      const { hirer, signUpCurators, jCraft, testUSD,  } = await loadFixture(deployContractsFixture);
       const curators = await signUpCurators();
       const OFFER = buildstring(8, 15);
       const curatorId = await jCraft.curatorsId(curators[0].address);
@@ -255,11 +255,11 @@ describe("JobberCraft test", function () {
     });
 
     it("Should post a new Job successfully", async function () {
-      const { OFFERPRICE, postJob, getJobs, JOB_REF, mintTestcUSD, testcUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, postJob, getJobs, JOB_REF, mintTestcUSD, testUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
       const curators = await signUpCurators();
       const curatorId = await jCraft.curatorsId(curators[0].address);
       await mintTestcUSD(hirer.address, OFFERPRICE);
-      await testcUSD.connect(hirer).approve(jCraft.address, OFFERPRICE);
+      await testUSD.connect(hirer).approve(jCraft.address, OFFERPRICE);
       const jobId = await postJob(hirer, curatorId.toNumber());
       const onchainJobs = await getJobs(jobId.toNumber());
       expect(onchainJobs[0].hirer).to.be.equal(hirer.address);
@@ -268,7 +268,7 @@ describe("JobberCraft test", function () {
     });
 
     it("Should allow both membership categories apply to work for offer within limit", async function () {
-      const { OFFERPRICE, mintTestcUSD, postJob, getJobs, upgradeOrDowngradeUser, requestToWork, getPositions, deployer, becomeAJobber, jobber1, jobber2, testcUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, mintTestcUSD, postJob, getJobs, upgradeOrDowngradeUser, requestToWork, getPositions, deployer, becomeAJobber, jobber1, jobber2, testUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
       let jobbers = Array.from([jobber1, jobber2]);
       var myBestPrices = Array.from([buildstring(60, 18), buildstring(55, 18)]);
       await becomeAJobber(jobbers, JOBBER_DATA);
@@ -276,7 +276,7 @@ describe("JobberCraft test", function () {
       const curators = await signUpCurators();
       const curatorId = await jCraft.curatorsId(curators[0].address);
       await mintTestcUSD(hirer.address, BigNumber(OFFERPRICE).times(2).toString());
-      await testcUSD.connect(hirer).approve(jCraft.address, OFFERPRICE);
+      await testUSD.connect(hirer).approve(jCraft.address, OFFERPRICE);
       const jobId = (await postJob(hirer, curatorId.toNumber())).toNumber();
       await requestToWork({
         froms: jobbers,
@@ -298,19 +298,19 @@ describe("JobberCraft test", function () {
     });
 
     it("Should restrict Non member from requesting jobs.", async function () {
-      const { OFFERPRICE, mintTestcUSD, postJob, jobber1, testcUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, mintTestcUSD, postJob, jobber1, testUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
       // let jobbers = Array.from([jobber1]);
       var myBestPrice = buildstring(60, 18);
       const curators = await signUpCurators();
       const curatorId = await jCraft.curatorsId(curators[0].address);
       await mintTestcUSD(hirer.address, BigNumber(OFFERPRICE).times(2).toString());
-      await testcUSD.connect(hirer).approve(jCraft.address, OFFERPRICE);
+      await testUSD.connect(hirer).approve(jCraft.address, OFFERPRICE);
       const jobId = (await postJob(hirer, curatorId.toNumber())).toNumber();
       await expect(jCraft.connect(jobber1).requestToWork(jobId, 8, myBestPrice)).to.be.revertedWith("1");
     });
 
     it("Should restrict probation member from requesting jobs above certain amount", async function () {
-      const { OFFERPRICE, mintTestcUSD, RESTRICTION_PRICE, becomeAJobber, jobber1, testcUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, mintTestcUSD, RESTRICTION_PRICE, becomeAJobber, jobber1, testUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
       let jobbers = Array.from([jobber1]);
       var myBestPrices = buildstring(55, 18);
       await becomeAJobber(jobbers, JOBBER_DATA);
@@ -319,14 +319,14 @@ describe("JobberCraft test", function () {
       await jCraft.setProbationOfferLimit(OFFERPRICE);
       const offer = BigNumber(RESTRICTION_PRICE).times(2).toString();
       await mintTestcUSD(hirer.address, offer);
-      await testcUSD.connect(hirer).approve(jCraft.address, offer);
+      await testUSD.connect(hirer).approve(jCraft.address, offer);
       await jCraft.connect(hirer).postJob(JOBTYPE, TITLE, TAGS, JOB_REF, PROPOSED_END_DATE_IN_DAYS, offer, curatorId);
       const jobId = (await jCraft.getLastJobId()).sub(1);
       await expect(jCraft.connect(jobber1).requestToWork(jobId.toString(), 8, myBestPrices)).to.be.revertedWith("4");
     });
 
     it("Should allow approved member take jobs with any offered prices", async function () {
-      const { OFFERPRICE, mintTestcUSD, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, jobber1, testcUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, mintTestcUSD, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, jobber1, testUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
       let jobbers = Array.from([jobber1]);
       var myBestPrices = [buildstring(55, 18)];
       await becomeAJobber(jobbers, JOBBER_DATA);
@@ -335,7 +335,7 @@ describe("JobberCraft test", function () {
       const curatorId = await jCraft.curatorsId(curators[0].address);
       await jCraft.setOfferLimit(OFFERPRICE);
       await mintTestcUSD(hirer.address, BigNumber(RESTRICTION_PRICE).times(2).toString());
-      await testcUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
+      await testUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
       await jCraft.connect(hirer).postJob(JOBTYPE, TITLE, TAGS, JOB_REF, PROPOSED_END_DATE_IN_DAYS, RESTRICTION_PRICE, curatorId);
       const jobId = (await jCraft.getLastJobId()).sub(1);
       await requestToWork({
@@ -350,7 +350,7 @@ describe("JobberCraft test", function () {
     });
 
     it("Hirer should successfully approve collaborators", async function () {
-      const { OFFERPRICE, mintTestcUSD, approveRequests, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, jobber1, jobber2, testcUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, mintTestcUSD, approveRequests, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, jobber1, jobber2, testUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
       let jobbers = Array.from([jobber1, jobber2]);
       var myBestPrices = [buildstring(55, 18), buildstring(53, 18)];
       await becomeAJobber(jobbers, JOBBER_DATA);
@@ -360,7 +360,7 @@ describe("JobberCraft test", function () {
       const curatorId = await jCraft.curatorsId(curators[0].address);
       await jCraft.setOfferLimit(OFFERPRICE);
       await mintTestcUSD(hirer.address, BigNumber(RESTRICTION_PRICE).times(2).toString());
-      await testcUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
+      await testUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
       await jCraft.connect(hirer).postJob(JOBTYPE, TITLE, TAGS, JOB_REF, PROPOSED_END_DATE_IN_DAYS, RESTRICTION_PRICE, curatorId);
       const jobId = (await jCraft.getLastJobId()).sub(1);
       await requestToWork({
@@ -381,7 +381,7 @@ describe("JobberCraft test", function () {
     });
 
     it("Jobber1 should submit and sign job completion successfully", async function () {
-      const { OFFERPRICE, mintTestcUSD, submitAndSignCompletion, approveRequests, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, jobber1, jobber2, testcUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, mintTestcUSD, submitAndSignCompletion, approveRequests, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, jobber1, jobber2, testUSD, hirer, signUpCurators, jCraft } = await loadFixture(deployContractsFixture);
       let jobbers = Array.from([jobber1, jobber2]);
       var myBestPrices = [buildstring(55, 18), buildstring(53, 18)];
       await becomeAJobber(jobbers, JOBBER_DATA);
@@ -391,7 +391,7 @@ describe("JobberCraft test", function () {
       const curatorId = await jCraft.curatorsId(curators[0].address);
       await jCraft.setOfferLimit(OFFERPRICE);
       await mintTestcUSD(hirer.address, BigNumber(RESTRICTION_PRICE).times(2).toString());
-      await testcUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
+      await testUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
       await jCraft.connect(hirer).postJob(JOBTYPE, TITLE, TAGS, JOB_REF, PROPOSED_END_DATE_IN_DAYS, RESTRICTION_PRICE, curatorId);
 
       const jobId = (await jCraft.getLastJobId()).sub(1);
@@ -410,9 +410,9 @@ describe("JobberCraft test", function () {
     });
 
     it("Hirer should successfully approve completed job", async function () {
-      const { OFFERPRICE, mintTestcUSD, submitAndSignCompletion, approveCompletion, approveRequests, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, curator1, curator2, testcUSD, hirer, signUpCurators, jCraft, feeTo } = await loadFixture(deployContractsFixture);
+      const { OFFERPRICE, mintTestcUSD, submitAndSignCompletion, approveCompletion, approveRequests, upgradeOrDowngradeUser, getJobs, deployer, requestToWork, RESTRICTION_PRICE, becomeAJobber, curator1, curator2, testUSD, hirer, signUpCurators, jCraft, feeTo } = await loadFixture(deployContractsFixture);
       let jobbers = Array.from([curator1, curator2]);
-      const initBalFeeTo = await testcUSD.balanceOf(feeTo.address);
+      const initBalFeeTo = await testUSD.balanceOf(feeTo.address);
       var myBestPrices = [buildstring(55, 18), buildstring(53, 18)];
       await becomeAJobber(jobbers, JOBBER_DATA);
       await upgradeOrDowngradeUser(deployer, curator2.address, 1);
@@ -421,11 +421,11 @@ describe("JobberCraft test", function () {
       const curatorId = await jCraft.curatorsId(curators[0].address);
       await jCraft.setOfferLimit(OFFERPRICE);
       await mintTestcUSD(hirer.address, BigNumber(RESTRICTION_PRICE).times(2).toString());
-      await testcUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
+      await testUSD.connect(hirer).approve(jCraft.address, RESTRICTION_PRICE);
       await jCraft.connect(hirer).postJob(JOBTYPE, TITLE, TAGS, JOB_REF, PROPOSED_END_DATE_IN_DAYS, RESTRICTION_PRICE, curatorId);
 
       const trustee = await jCraft.trustees(hirer.address);
-      const initBalTrustee = await testcUSD.balanceOf(trustee);
+      const initBalTrustee = await testUSD.balanceOf(trustee);
 
       const jobId = (await jCraft.getLastJobId()).sub(1);
       await requestToWork({
@@ -441,8 +441,8 @@ describe("JobberCraft test", function () {
       const onchainJobs = await getJobs(jobId.toNumber());
 
       expect(JobStatus[onchainJobs.job.jStatus]).to.be.equal("CLOSED");
-      expect((await testcUSD.balanceOf(feeTo.address)).gt(initBalFeeTo)).to.be.true;
-      expect((await testcUSD.balanceOf(trustee)).lt(initBalTrustee)).to.be.true;
+      expect((await testUSD.balanceOf(feeTo.address)).gt(initBalFeeTo)).to.be.true;
+      expect((await testUSD.balanceOf(trustee)).lt(initBalTrustee)).to.be.true;
     });
   });
 });

@@ -36,7 +36,7 @@ abstract contract Storage is IJob {
   //Account to receive fee
   address public feeTo;
 
-  // Stablecoin address i.e cUSD
+  // Stablecoin address
   address public paymentCurrency;
 
   ///@dev Cancellation rate
@@ -73,8 +73,10 @@ abstract contract Storage is IJob {
     _;
   }
 
-  constructor(address _feeTo) {
+  constructor(address _feeTo, address token, address _jobberContract) {
     feeTo = _feeTo;
+    paymentCurrency = token;
+    jobberContract = _jobberContract;
   }
 
   function _initialize (
