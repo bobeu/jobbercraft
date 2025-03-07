@@ -2,12 +2,13 @@ import { getContractData } from "../../utils/getContractData";
 import { simulateContract, writeContract } from "wagmi/actions";
 import { waitForConfirmation } from "../../utils/waitForConfirmation";
 import { postJobAbi } from "@/apis/abis";
-import { errorMessage } from "../formatError";
 import { PostJob, TrxResult } from "@/customTypes";
 
 export default async function postJob(args: PostJob) : Promise<TrxResult> {
   const { curatorId, config, account, callback,  jobRef, jobType, offerPrice, proposedEndDateInDays, tags, title } = args;
   const address = getContractData().jCraft;
+  console.log("Args", args)
+  console.log("Address", address)
   let returnValue : TrxResult = 'reverted';
   await simulateContract(config, {
     address,
@@ -20,7 +21,7 @@ export default async function postJob(args: PostJob) : Promise<TrxResult> {
     const hash = await writeContract(config, request );
     returnValue = await waitForConfirmation({config, hash, callback})
   }).catch((error: any) => {  
-    callback?.({message: errorMessage(error)});
+    callback?.({message: error?.message || error?.data?.message || error});
   });
 
   return returnValue;

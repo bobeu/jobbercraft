@@ -26,16 +26,16 @@ export default function App({ Component, pageProps }: AppProps) {
       </NextHead>
         {
           isMounted &&
+          <AppProvider>
             <BrowserRouter>
               <AppThemeProvider>
                 <ReduxProvider store={store}>
                   <ScopedCssBaseline enableColorScheme />
-                  <AppProvider>
                     <Component {...pageProps} />
-                  </AppProvider>
                 </ReduxProvider>
               </AppThemeProvider>
             </BrowserRouter>
+          </AppProvider>
         }
     </React.Fragment>
   ) : null;

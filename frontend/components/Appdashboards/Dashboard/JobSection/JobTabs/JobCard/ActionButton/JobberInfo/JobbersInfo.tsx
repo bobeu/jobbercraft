@@ -83,11 +83,11 @@ export const InfoDisplay = ({ formattedJob, actions, popUpDrawer, toggleDrawer }
 
 export const JobbersInfo: React.FC<ProvidersProps> = ({toggleDrawer, popUpDrawer, jobber_formatted}) => {
     return(
-        <Drawer openDrawer={popUpDrawer} setDrawerState={toggleDrawer} styles={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: '16px', color: '#fed7aa', borderLeft: '1px solid rgb(249 244 244 / 0.3)', height: "100%"}} >
-            <div className="p-0 flex justify-between items-center text-lg md:text-xl font-bold">
-                <h3>Jobbers willing to collaborate</h3>
+        <Drawer openDrawer={popUpDrawer} setDrawerState={toggleDrawer} styles={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: '16px', color: '', borderLeft: '1px solid rgb(249 244 244 / 0.3)', height: "100%"}} >
+            <div className="p-0 flex text-cyan-100 justify-between items-center text-lg md:text-xl font-bold">
+                <h3>Requests to collaborate</h3>
                 <button onClick={() => toggleDrawer(0)}>
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 lg:size-8 active:ring-1 text-orangec hover:text-orangec/70 rounded-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="size-6 lg:size-8 active:ring-1 text-white1 hover:text-orangec/70 rounded-lg">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                     </svg>
                 </button>

@@ -1,21 +1,20 @@
 import React from "react";
 import Link  from "next/link";
 import { Divider, Typography } from "@mui/material";
-import { JobberCraftLogo } from "../assets";
 import { Icon as Iconify } from "@iconify/react";
+import { JobberCraftTempLogo } from "./PublicNavbar";
 
-// [#4A5F90]
 export default function PublicFooter() {
   return (
     <div>
       <footer>
         <div className=" w-full relative flex justify-center items-center my-0">
-          <div className="bg-cyan-900 w-full h-full justify-center p-4">
+          <div className="bg-green1 w-full h-full justify-center p-4">
             <div className="container flex flex-wrap items-center mx-auto">
               <div className="w-full flex flex-col md:flex-row justify-between gap-4 py-11">
                 <div>
                   <Link href="/" className="flex items-center">
-                    <JobberCraftLogo                                   />
+                    <JobberCraftTempLogo />
                   </Link>
                   {/* <Typography variant="body1" className="text-gray-300  my-4">
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. At

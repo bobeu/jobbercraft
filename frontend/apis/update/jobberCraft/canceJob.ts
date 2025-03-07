@@ -2,7 +2,6 @@ import { getContractData } from "../../utils/getContractData";
 import { simulateContract, writeContract } from "wagmi/actions";
 import { waitForConfirmation } from "../../utils/waitForConfirmation";
 import { cancelJobAbi } from "@/apis/abis";
-import { errorMessage } from "../formatError";
 import { CancelJob, TrxResult } from "@/customTypes";
 
 export default async function cancelJob(param: CancelJob) {
@@ -19,7 +18,7 @@ export default async function cancelJob(param: CancelJob) {
       callback?.({message: "Completing cancellation request"});
       const hash = await writeContract(config, request );
       returnValue = await waitForConfirmation({config, hash, callback: callback!});
-    }).catch((error: any) => callback?.({message: errorMessage(error)}));
+    }).catch((error: any) => callback?.({message: error?.message || error?.data?.message || error}));
 
   return returnValue;
 }

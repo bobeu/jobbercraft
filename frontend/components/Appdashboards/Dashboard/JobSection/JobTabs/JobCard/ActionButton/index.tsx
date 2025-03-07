@@ -85,7 +85,7 @@ export const ActionButton = (props: RenderActionsProps) => {
             <CustomButton
                 disabled={buttonObj.disable}
                 handleButtonClick={handleClick}
-                overrideClassName="bg-gray1 text-orange-300 rounded-full"
+                overrideClassName="bg-gray1 text-cyan-200 rounded-2xl w-full"
             >
                 {buttonObj.buttonText}
             </CustomButton>

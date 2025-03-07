@@ -25,8 +25,7 @@ const electroneum_testnet : Chain = {
   },
   rpcUrls: {
     default: {
-      // http: ["https://rpc.testnet.ms",],
-      http: [],
+      http: ["https://rpc.ankr.com/electroneum_testnet", "https://testnet-rpc.electroneum.com"],
       webSocket: []
     }
   }
@@ -36,8 +35,8 @@ const config = getDefaultConfig({
   appName: 'Simplifinance',
   projectId,
   appIcon: '/favicon-32x32.png',
-  appDescription: 'A decentralized p2p, DeFi protocol',
-  appUrl: 'https://testnet.simplifinance.xyz',
+  appDescription: 'A decentralized freelancing protocol',
+  appUrl: '',
   chains: [ electroneum_testnet],
   
 });

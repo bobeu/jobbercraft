@@ -1,30 +1,24 @@
-import React, { ChangeEvent } from 'react';
-// import { Input, Modal } from 'antd';
-// import { UploadOutlined } from '@ant-design/icons';
-// import type { UploadProps } from 'antd';
-// import { message, Upload } from 'antd';
+import React from 'react';
 import { useAccount, useConfig } from 'wagmi';
-// import sendTransactions from '@/components/apis';
 import { useNavigate } from 'react-router-dom';
-import { Container, Input } from '@mui/material';
-import Button from '@mui/material/Button';
-import Link from 'next/link';
-// import becomeAJobber from '@/apis/update/jobberCraft/becomeAJobber';
+import { Container, Input, Stack } from '@mui/material';
 import { formatAddr, handleTransact } from '@/utilities';
 import { TransactionCallback } from '@/customTypes';
+import { ConnectWallet } from '@/components/ConnectWallet';
 
 const BecomeAJobber = () => {
   const [name, setName] = React.useState<string>('');
   const [aka, setAlias] = React.useState<string>('');
   const [field, setField] = React.useState<string>('');
-  const [profileURI, setProfileUrl] = React.useState<string>('');
+  const [profileUri, setProfileUrl] = React.useState<string>('');
+  const [avatarUri, setAvatarUrl] = React.useState<string>('');
 
   const { address, isConnected } = useAccount();
   const config = useConfig();
   const navigate = useNavigate();
 
   const backToMain = () => {
-    navigate('appmain', {preventScrollReset: true,});
+    navigate('/', {preventScrollReset: true});
   }
 
   const callback: TransactionCallback = (arg) => {
@@ -40,8 +34,8 @@ const BecomeAJobber = () => {
         aka,
         name,
         field,
-        avatarUrl: 'disabled',
-        profileURI,
+        avatarUrl: avatarUri,
+        profileURI: profileUri,
         config,
         account: formatAddr(address),
         callback
@@ -49,10 +43,10 @@ const BecomeAJobber = () => {
     })
   }
 
-  const handleOnChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, value: string) => {
+  const handleOnChange = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>, tag: string) => {
     event?.preventDefault();
     const setValue = event.target.value;
-    switch (value) {
+    switch (tag) {
       case 'name':
         setName(setValue);
         break;
@@ -68,6 +62,10 @@ const BecomeAJobber = () => {
       case 'profileurl':
         setProfileUrl(setValue);
         break;
+
+      case 'avatarurl':
+        setAvatarUrl(setValue);
+        break;
     
       default:
         break;
@@ -76,62 +74,38 @@ const BecomeAJobber = () => {
 
   const onSubmit = async() => {
     console.log("FormRef", 
-      `${name}\n${aka}\n${field}\n${profileURI}`
+      `${name}\n${aka}\n${field}\n${profileUri}`
     );
 
     await handleCreateAvatar();
   }
 
-  // const uploadProps: UploadProps = {
-  //   name: 'file',
-  //   action: 'https://run.mocky.io/v3/435e224c-44fb-4773-9faf-380c5e6a2188',
-  //   headers: {
-  //     authorization: 'authorization-text',
-  //   },
-  //   onChange(info) {
-  //     if (info.file.status !== 'uploading') {
-  //       console.log(info.file, info.fileList);
-  //     }
-  //     if (info.file.status === 'done') {
-  //       message.success(`${info.file.name} file uploaded successfully`);
-  //     } else if (info.file.status === 'error') {
-  //       message.error(`${info.file.name} file upload failed.`);
-  //     }
-  //   },
-  // };
-
   return (
-    <React.Fragment>
-      <Container maxWidth={'sm'} >
-        <div className='bg-cyan-700 w-full p-2 rounded mt-2 md:mt-20'>
-          <div className='p-2'>
-            <h1 className='text-white text-lg font-semibold'>Sign Up</h1>
+    <div className='bg-green1'>
+      <Container maxWidth={'sm'} className='space-y-8'>
+        <div className='w-full rounded pt-4 md:pt-10'>
+          <div className='text-white pb-4 font-semibold flex justify-between items-center'>
+            <h1 className='text-lg text-cyan-600'>Sign Up</h1>
+            <button className='border border-gray1 rounded-lg px-2 py-1 text-cyan-300 hover:text-cyan-600' onClick={backToMain}>Back</button>
           </div>
-          <div className='flex flex-col justify-start pl-4 pb-4 items-center gap-3'>
-            <Input placeholder='Cannot be changed' onChange={(e) => handleOnChange(e, 'name')} type='text' required className='p-3'/>
-            <Input placeholder='Alias' onChange={(e) => handleOnChange(e, 'aka')} required type='text' className='p-3'/>
-            <Input placeholder='ex: UI/UX Designer' onChange={(e) => handleOnChange(e, 'field')} type='text' required className='p-3' />
-            <Input placeholder='Portfolio/Bios/Website' onChange={(e) => handleOnChange(e, 'profileurl')} type='text' className='p-3' />
-            <div className='w-full flex justify-start pl-3'>
-              {/* <Upload {...uploadProps} disabled className='bg-white text-cyan-700 rounded-lg '> */}
-                {/* <Button startIcon={<UploadOutlined />} className='w-full p-4'>Click to Upload</Button> */}
-                <Button startIcon={""} className='w-full p-4'>Click to Upload</Button>
-              {/* </Upload> */}
-            </div>
-          </div>
+          <Stack className='space-y-4 rounded-lg'>
+            <Input placeholder='Cannot be changed' onChange={(e) => handleOnChange(e, 'name')} type='text' required className='p-1 bg-cyan-100'/>
+            <Input placeholder='Alias' onChange={(e) => handleOnChange(e, 'aka')} required type='text' className='p-1 bg-cyan-100'/>
+            <Input placeholder='ex: UI/UX Designer' onChange={(e) => handleOnChange(e, 'field')} type='text' required className='p-1 bg-cyan-100' />
+            <Input placeholder='Portfolio/Bios/Website' onChange={(e) => handleOnChange(e, 'profileurl')} type='text' className='p-1 bg-cyan-100' />
+            <Input placeholder='Avatar uri (if any)' onChange={(e) => handleOnChange(e, 'avtarurl')} type='text' className='p-1 bg-cyan-100' />
+          </Stack>
         </div>
-        <div className='w-full flex justify-end items-center gap-2 mt-6'>
-          <button className='w-[40%] bg-cyan-500 rounded  border-cyan-500 text-white hover:shadow-sm hover:shadow-yellow-500 py-4 hover:text-white' >
-            <Link href={'/appmain'}>
-              Return
-            </Link>
-          </button>,
-          <button className='bg-cyan-700 w-[40%] rounded text-white hover:shadow-sm hover:shadow-yellow-500 py-4 hover:text-white' onClick={onSubmit}>
-            Create my Avatar
-          </button>,
+        <div className='flex justify-start'>
+        {
+          !isConnected? <ConnectWallet /> : 
+            <button className='border border-gray1 w-[40%] rounded-lg text-white hover:text-cyan-600 py-4' onClick={onSubmit}>
+              Submit
+            </button>
+        }
         </div>
       </Container>
-    </React.Fragment>
+    </div>
   );
 };
 

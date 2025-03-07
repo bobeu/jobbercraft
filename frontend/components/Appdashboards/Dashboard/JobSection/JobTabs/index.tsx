@@ -20,7 +20,7 @@ const JobTabs = () => {
   let disableTab = React.useRef<boolean[]>([])
   // let params = React.useRef({});
   const [mode, setMode] = useState<TabPosition>('top');
-  const [jobs, setJobs] = useState<AllJobs>([]);
+  // const [jobs, setJobs] = useState<AllJobs>([]);
   const [modalOpen, setModal] = useState(false);
 
   const { data, isPending } = useReadContract({
@@ -37,7 +37,7 @@ const JobTabs = () => {
     setModal(!modalOpen);  
   }
 
-  const { address, connector } = useAccount();
+  const { address, isConnected } = useAccount();
 
   const handleCreateAvatar = async() => {
     // const result = await sendTransactions().interact(
@@ -59,23 +59,23 @@ const JobTabs = () => {
     
   }
 
-  const handleModeChange = (e: any) => {
-    setMode(e.target.value);
-  };
+  // const handleModeChange = (e: any) => {
+  //   setMode(e.target.value);
+  // };
 
-  const toggleDisable = (index: number, value: boolean) => {
-    disableTab.current[index] = value;
-  }
+  // const toggleDisable = (index: number, value: boolean) => {
+  //   disableTab.current[index] = value;
+  // }
 
-  React.useEffect(() => {
-    !jobs.length && setJobs(MOCKJOBS); 
-  }, []);
+  // React.useEffect(() => {
+  //   !jobs.length && setJobs(MOCKJOBS); 
+  // }, []);
 
   return (
     <section className='h-[100vh] m-4'>
-      <Grid container xs={'auto'}>
+      <Grid container xs={'auto'} spacing={2}>
         {
-          formatJobContent(data || MOCKJOBS, address || zeroAddress).result.map((job, index) => (
+          formatJobContent(!isConnected? MOCKJOBS : data? data : MOCKJOBS, address || zeroAddress).result.map((job, index) => (
             <Grid item xs={12} sm={6} md={4} lg={3} key={index}>
               <motion.button
                 initial={{opacity: 0}}
@@ -83,12 +83,11 @@ const JobTabs = () => {
                 transition={{duration: '0.5', delay: index/MOCKJOBS.length}}
                 className='w-full rounded-md cursor-pointer' 
               >
-                { isPending? <Loading /> : data? null : <JobCard { ...{ jobDetail: job, jobId: BigInt(index) }} /> }
+                { (isConnected && !isPending)? <JobCard { ...{ jobDetail: job, jobId: BigInt(index) }} /> : (isConnected && isPending)? <Loading /> : <JobCard { ...{ jobDetail: job, jobId: BigInt(index) }} /> }
               </motion.button>
             </Grid>
           ))
         }
-
       </Grid>
     </section>
   );

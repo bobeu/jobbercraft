@@ -15,11 +15,11 @@ export default function Testimonial() {
     autoplaySpeed: 3000,
   };
   return (
-    <div id="testimonial" className=" w-full relative flex justify-center items-center my-20">
+    <div id="testimonial" className="bg-green1 w-full relative flex justify-center items-center">
       <div className="container">
         <div className="bg-[url('/map-background.svg')] bg-no-repeat bg-cover bg-left-bottom w-full h-full">
           <div className="py-24">
-            <div className="text-center ">
+            <div className="text-center text-cyan-300">
               <Typography
                 color="primary"
                 variant="subtitle1"
@@ -39,18 +39,18 @@ export default function Testimonial() {
                     <div key={i}>
                       <Typography
                         variant="h3"
-                        className="font-bold text-gray-500 text-center"
+                        className="font-bold text-white text-center"
                       >
                         {testimonial.company}
                       </Typography>
                       <Typography
                         variant="h6"
-                        className="mt-8 text-center font-bold"
+                        className="mt-8 text-center font-bold text-white"
                       >
                         {testimonial.testimonial}
                       </Typography>
 
-                      <div className="mt-8 flex justify-center flex-col items-center">
+                      <div className="mt-8 flex justify-center flex-col items-center text-cyan-200">
                         {/* <Avatar
                           alt={testimonial.fullname}
                           src={testimonial.pics}

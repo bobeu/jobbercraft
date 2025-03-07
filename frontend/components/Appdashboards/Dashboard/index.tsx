@@ -6,22 +6,33 @@ import { useAccount, } from "wagmi";
 import { ConnectWallet } from "@/components/ConnectWallet";
 import AppNavigation from "./AppNavigation";
 import { CustomButton } from "@/components/CustomButton";
+import { useNavigate } from "react-router-dom";
 
 function DashBoard() {
-  const { isConnected, address } = useAccount();
+  const [value, setValue] = React.useState(0);
+  const { isConnected } = useAccount();
+  const navigate = useNavigate();
 
-  const handlePostJob = () => {
-    
-  }
+  const handlePostJob = () => setValue(1);
+
+  const handleChangeIndex = (index: number) => {
+    setValue(index);
+  };
+
+  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
+  };
+
+  const handleButtonClick = () => navigate('/', {preventScrollReset: true});
 
   return (
     <React.Fragment>
-      <section className="bg-[url('/map-background.svg')] bg-no-repeat bg-cover bg-right-top w-full bg-gray1 mt-8 md:mt-14" id='applandingpage'>
+      <section className="bg-[url('/map-background.svg')] bg-no-repeat bg-cover bg-right-top w-full bg-gray1" id='applandingpage'>
         <Container maxWidth='lg'>
           <div className="w-full flex justify-between items-center py-4 ">
-            <h1 className="w-2/4 text-white1 text-lg font-semibold">
-              Demo
-            </h1>
+            <button onClick={handleButtonClick} className=" text-cyan-600 text-lg font-semibold hover:text-cyan-400">
+              Back
+            </button>
             <div className="w-2/4 flex justify-end items-center">
               <ConnectWallet />
               <div className="w-full flex justify-start md:justify-end items-center gap-2">
@@ -60,7 +71,11 @@ function DashBoard() {
             </div>
           </div>
         </Container>
-        <AppNavigation />
+        <AppNavigation 
+            handleChange={handleChange}
+            handleChangeIndex={handleChangeIndex}
+            value={value}
+        />
       </section>
     </React.Fragment>
   );

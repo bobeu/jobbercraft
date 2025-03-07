@@ -4,12 +4,20 @@ import Link from "next/link";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useTheme } from "@mui/material/styles";
 import clsx from "clsx";
-// import { RouteEnum } from "../constants";
-import { JobberCraftLogo } from "../assets";
-// import { useRouter } from "next/router";
 
 interface PublicNavbarProp {
   whiteNavbar: boolean;
+}
+
+export const JobberCraftTempLogo = () => {
+  return(
+    <Link href={"/"} className="flex items-center">
+      <h1 className="relative text-cyan-600 text-4xl font-black">
+        J
+        <span className="absolute text-cyan-200 text-2xl">Craft</span>
+      </h1>
+    </Link>
+  )
 }
 
 function PublicNavbar(props: PublicNavbarProp) {
@@ -22,9 +30,7 @@ function PublicNavbar(props: PublicNavbarProp) {
   const toggleMenuLink = () => setIsMenuLink(!isMenuLink);
 
   const handleClick = (tagId: string) => {
-    // console.log("TagID", tagId);
     document.getElementById(`${tagId}`)?.scrollIntoView({behavior: 'smooth', inline: 'start', block: 'start'})
-    // location.href = tagId;
   };
 
   useLayoutEffect(() => {
@@ -38,12 +44,10 @@ function PublicNavbar(props: PublicNavbarProp) {
   }, []);
 
   return (
-    <div className={clsx("fixed top-0 left-0 w-full z-50 p-4", isFixedHeader ? "bg-white shadow" : "")}>
+    <div className={clsx("fixed top-0 left-0 w-full z-50 p-4", isFixedHeader ? "bg-gray1 shadow" : "")}>
       <nav className={clsx("border-gray-200 py-5", isFixedHeader ? (whiteNavbar ? "bg-primary-main" : "bg-white") : " bg-transparent")}>
         <div className="container flex flex-wrap justify-between items-center mx-auto">
-          <Link href={"/"} className="flex items-center">
-            <JobberCraftLogo />
-          </Link>
+          <JobberCraftTempLogo />
           <div className="flex items-center  md:hidden ">
             <div data-collapse-toggle="mobile-menu" className="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden dark:text-gray-400 " aria-controls="mobile-menu" aria-expanded="false" onClick={toggleMenuLink}>
               <span className="sr-only">Open main menu</span>
@@ -102,82 +106,5 @@ function PublicNavbarResponsive() {
 
 const NAVLINKS = ['Features', 'Testimonial'];
 
-// const LINKS = [
-//   { name: "Features", to: RouteEnum.FEATURES, tagId: "features" },
-//   { name: "Testimonial", to: RouteEnum.TESTIMONIAL, tagId: "testimonial" }
-//   // { name: "B", to: RouteEnum.DASHBOARD, tagId: '#' }
-// ];
-
 export default PublicNavbar;
 
-                {/* <Link key={name} className={`block py-2 pr-4 pl-3`} {...link} onClick={toggleMenuLink} href={to}> */}
-
-
-// import AppBar from '@mui/material/AppBar';
-// import Tabs from '@mui/material/Tabs';
-// import Tab from '@mui/material/Tab';
-// import Typography from '@mui/material/Typography';
-// import Zoom from '@mui/material/Zoom';
-// import Fab from '@mui/material/Fab';
-// import AddIcon from '@mui/icons-material/Add';
-// import EditIcon from '@mui/icons-material/Edit';
-// import UpIcon from '@mui/icons-material/KeyboardArrowUp';
-// import { green } from '@mui/material/colors';
-// import Box from '@mui/material/Box';
-// import { SxProps } from '@mui/system';
-
-// const fabStyle = {
-//   position: 'absolute',
-//   bottom: 16,
-//   right: 16,
-// };
-
-// const fabGreenStyle = {
-//   color: 'common.white',
-//   bgcolor: green[500],
-//   '&:hover': {
-//     bgcolor: green[600],
-//   },
-// };
-
-// function FloatingActionZoom({index} : {index: number}) {
-//   const theme = useTheme();
-//   const [value, setValue] = React.useState(0);
-
-//   const handleChange = (event: unknown, newValue: number) => {
-//     setValue(newValue);
-//   };
-
-//   const handleChangeIndex = (index: number) => {
-//     setValue(index);
-//   };
-
-//   const transitionDuration = {
-//     enter: theme.transitions.duration.enteringScreen,
-//     exit: theme.transitions.duration.leavingScreen,
-//   };
-
-//   return (
-//     <Box
-//       sx={{
-//         bgcolor: 'background.paper',
-//         width: 500,
-//         position: 'relative',
-//         minHeight: 200,
-//       }}
-//     >
-//       <Zoom
-//         in={value === index}
-//         timeout={transitionDuration}
-//         style={{
-//           transitionDelay: `${value === index ? transitionDuration.exit : 0}ms`,
-//         }}
-//         unmountOnExit
-//       >
-//         <Fab sx={{ ...fabStyle, ...fabGreenStyle }} aria-label='Expand' color='inherit'>
-//           <UpIcon />
-//         </Fab>
-//       </Zoom>
-//     </Box>
-//   );
-//                 }

@@ -1,13 +1,7 @@
-import React, { ChangeEvent } from 'react';
-// import { Button, Input, Modal } from 'antd';
-// import { UploadOutlined } from 'ant-design@/icons';
-// import type { UploadProps } from 'antd';
-// import { message, Upload } from 'antd';
+import React from 'react';
 import { useAccount, useConfig } from 'wagmi';
 import Modal from "@mui/material/Modal";
-// import Button from "@mui/material/Button";
 import Input from '@mui/material/Input';
-import { CustomButton } from '@/components/CustomButton';
 import becomeAJobber from '@/apis/update/jobberCraft/becomeAJobber';
 import { formatAddr } from '@/utilities';
 import { TransactionCallback } from '@/customTypes';
@@ -15,9 +9,6 @@ import Backdrop from '@mui/material/Backdrop';
 import Fade from '@mui/material/Fade';
 import useAppStorage from '@/components/StateContextProvider/useAppStorage';
 import Box from '@mui/material/Box';
-import Stack from '@mui/material/Stack';
-import ButtonTemplate from '@/components/ButtonTemplate';
-// import sendTransactions from '@/components/apis';
 
 interface CreateAvatarProps {
   toggleModal: () => void;
@@ -31,7 +22,7 @@ const CreateAvatar = (props: CreateAvatarProps) => {
   const [field, setField] = React.useState<string>('');
   const [profileURI, setProfileUrl] = React.useState<string>('');
 
-  const { address, isConnected } = useAccount();
+  const { address } = useAccount();
   const config = useConfig();
   const { setmessage } = useAppStorage()
 

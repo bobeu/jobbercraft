@@ -1,28 +1,22 @@
-import Collapse, { CollapseProps } from '@mui/material/Collapse';
+import Collapse from '@mui/material/Collapse';
 import React from 'react';
-// import type { CollapseProps, } from 'antd';
-// import { Collapse, Space } from 'antd';
 
 type CollapsibleProps = {
-  items: CollapseProps;
+  children: React.ReactNode;
+  className: string;
 }
 
 const Collapsible = (props: CollapsibleProps) => {
-  const { items } = props;
-  const onChange = (key: string | string[]) => {
-    console.log(key);
-  };
+  const [open, setOpen] = React.useState<boolean>(false);
+  const { className, children } = props;
 
   return (
-    // <Space direction="vertical" className='h-[50vh] md:h-[28vh]'>
-      <Collapse 
-        // items={items} 
-        // onChange={onChange} 
-        // collapsible='header'
-        // bordered={false}
-        className='bg-cyan-300 rounded-md text-cyan-700 mt-4'
-      />
-  // </Space>
+    <div className='w-full mt-6'>
+      <button className='border border-gray1 p-3 rounded-lg hover:text-cyan-600' onClick={() => setOpen(!open)}>Select category</button>
+      <Collapse in={open} timeout="auto" unmountOnExit className={className}>
+        { children && children }
+      </Collapse>
+    </div>
   )
   
 };

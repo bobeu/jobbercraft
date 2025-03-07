@@ -43,17 +43,8 @@ function a11yProps(index: number) {
   };
 }
 
-export default function AppNavigation() {
+export default function AppNavigation({handleChange, handleChangeIndex, value} : {handleChange: (event: React.SyntheticEvent, newValue: number) => void, handleChangeIndex: (index: number) => void, value: number}) {
   const theme = useTheme();
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-  };
-
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
-  };
 
   return (
     <Box sx={{ bgcolor: 'background.paper', width: '100%', }}>
@@ -65,7 +56,7 @@ export default function AppNavigation() {
           textColor="inherit"
           variant="scrollable"
           aria-label="full width tabs example"
-          className='bg-gray1 text-white1'
+          className='bg-green1 text-white1'
         >
           <Tab label="Jobs" {...a11yProps(0)} />
           <Tab label="Post Job" {...a11yProps(1)} />
@@ -76,6 +67,7 @@ export default function AppNavigation() {
         axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
         index={value}
         onChangeIndex={handleChangeIndex}
+        className='bg-gray1 p-4'
       >
         <TabParent value={value} index={0} dir={theme.direction}>
           <JobTabs />

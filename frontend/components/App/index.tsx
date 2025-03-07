@@ -21,7 +21,7 @@ const home = () => {
 
 export default function App() {
   return (
-    <main className="p-0 bg-gray-100 min-h-screen">
+    <main className="p-0 bg-green1 min-h-screen">
       <Nodeselector 
         nodes={[home(), <AppMain />,<BecomeAJobber />]} 
         paths={["/", "/appmain","/becomeajobber"]} 

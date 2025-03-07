@@ -20,11 +20,11 @@ export const JobberInfo = ({ formattedData, index }: ProviderProps) => {
 
     return(
         <div >
-            <button onClick={handleCollapse} className={`w-full ${flexSpread} text-orange-300 p-1 text-xs uppercase hover:text-orange-300 focus:font-semibold`}>
-                <h3>{`Prov. ${index + 1}`}</h3>
+            <button onClick={handleCollapse} className={`w-full ${flexSpread} text-cyan-300 p-1 text-xs uppercase hover:text-cyan-700 focus:font-semibold`}>
+                <h3>{`Jobber ${index + 1}`}</h3>
                 <Chevron open={open} />
             </button>
-            <Collapse in={open} timeout="auto" unmountOnExit className={'w-full bg-gray1 p-4 text-orange-200'}>
+            <Collapse in={open} timeout="auto" unmountOnExit className={'w-full bg-gray1 p-4 text-cyan-100'}>
                 <ul className="w-full space-y-2 text-xs relative">
                     <li className={`${flexSpread} underline underline-offset-4`}>
                         <h3 className="text-center font-bold text-sm md:text-md">Address</h3>

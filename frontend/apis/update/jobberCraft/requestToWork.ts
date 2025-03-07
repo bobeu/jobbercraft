@@ -3,7 +3,6 @@ import { getContractData } from "../../utils/getContractData";
 import { simulateContract, writeContract } from "wagmi/actions";
 import { waitForConfirmation } from "../../utils/waitForConfirmation";
 import { requestWorkAbi } from "@/apis/abis";
-import { errorMessage } from "../formatError";
 
 export default async function requestToWork(args: RequestToWork) {
   const { config, callback, account, jobId, myBestPrice, proposedCompletionDateInDays } = args;
@@ -19,7 +18,7 @@ export default async function requestToWork(args: RequestToWork) {
     const hash = await writeContract(config, request );
     callback?.({message: "Sending your request"});
     returnValue = await waitForConfirmation({config, hash, callback: callback!});
-  }).catch((error: any) => callback?.({message: errorMessage(error)}));
+  }).catch((error: any) => callback?.({message: error?.message || error?.data?.message || error}));
       
   return returnValue;
 }

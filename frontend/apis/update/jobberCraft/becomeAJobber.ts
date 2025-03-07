@@ -2,7 +2,6 @@ import { getContractData } from "../../utils/getContractData";
 import { simulateContract, writeContract } from "wagmi/actions";
 import { waitForConfirmation } from "../../utils/waitForConfirmation";
 import { becomeAJobberAbi } from "@/apis/abis";
-import { errorMessage } from "../formatError";
 import { BecomeAJobber, TrxResult } from "@/customTypes";
 
 export default async function becomeAJobber(args: BecomeAJobber ) {
@@ -22,7 +21,7 @@ export default async function becomeAJobber(args: BecomeAJobber ) {
         returnValue = await waitForConfirmation({config, hash, callback: callback!});
       }).catch((error: any) => {
         returnValue = 'reverted';
-        callback?.({message: errorMessage(error)});
+        callback?.({message: error?.message || error?.data?.message || error});
       });
   
     return returnValue;
