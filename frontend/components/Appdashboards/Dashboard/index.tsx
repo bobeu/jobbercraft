@@ -15,9 +15,9 @@ function DashBoard() {
 
   const handlePostJob = () => setValue(1);
 
-  const handleChangeIndex = (index: number) => {
-    setValue(index);
-  };
+  // const handleChangeIndex = (index: number) => {
+  //   setValue(index);
+  // };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
@@ -73,7 +73,6 @@ function DashBoard() {
         </Container>
         <AppNavigation 
             handleChange={handleChange}
-            handleChangeIndex={handleChangeIndex}
             value={value}
         />
       </section>

@@ -3,7 +3,6 @@ import Stack from "@mui/material/Stack";
 import { Spinner } from "@/components/Spinner";
 import useAppStorage from "@/components/StateContextProvider/useAppStorage";
 import Drawer from './Drawer';
-import { formatError, } from "@/apis/update/formatError";
 import Message from "@/components/Message";
 import { VoidFunc } from "@/customTypes";
 import ButtonTemplate from "@/components/ButtonTemplate";
@@ -26,7 +25,7 @@ export const Confirmation :
     };
 
     const callback_after = (errored: boolean, error?: any) => {
-        errored && setmessage(formatError({error, }));
+        errored && setmessage(error?.message || error?.data.message);
         setLoading(false);
         setTimeout(() => {
             handleCloseDrawer();
@@ -43,7 +42,7 @@ export const Confirmation :
            back?.();
         })
         .catch((error: any) => {
-            callback_after(true, formatError({error, }));
+            callback_after(true, error?.message || error?.data.message);
         });
     }
 

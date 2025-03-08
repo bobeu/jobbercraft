@@ -1,7 +1,6 @@
 import React from 'react';
-import { Avatar, Button } from '@mui/material';
+import { Avatar } from '@mui/material';
 import Link from 'next/link';
-import { UserInputBase } from '@/components/UserInput';
 import BigNumber from 'bignumber.js';
 import { Profile, Tier } from '@/customTypes';
 
@@ -10,7 +9,8 @@ const index = () => {
     <section className='w-full text-white1 py-4' id='#jobbers'>
       <div className='flex justify-between px-4 items-center text-2xl w-full h-[42px]'>
         {/* <h1 className='font-semibold'>Jobbers</h1> */}
-        <UserInputBase 
+        <input
+          type="text"
           placeholder='Search name'
           className='bg-gray1 border border-green1 rounded-lg'
         />

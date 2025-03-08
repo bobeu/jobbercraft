@@ -26,7 +26,7 @@ function ErrorContent (props: ErrorContentProps) {
         <Icon fontSize="medium" className="text-cyan-900 font-semibold">
           sentiment_dissatisfied
         </Icon>
-        <IllustrationEmptyContent width='50' height='50'/>
+        <IllustrationEmptyContent />
         {/* <img src={ErrorContentImg} alt="ErrorContent" width={100} /> */}
       </div>
       <Typography

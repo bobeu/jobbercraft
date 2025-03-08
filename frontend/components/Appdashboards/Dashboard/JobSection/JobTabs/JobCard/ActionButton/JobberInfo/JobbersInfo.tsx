@@ -72,7 +72,7 @@ export const InfoDisplay = ({ formattedJob, actions, popUpDrawer, toggleDrawer }
                     <h1>Tags</h1>
                     {
                         tags?.map((tag) => (
-                            <Button variant="text">{tag}</Button>
+                            <Button key={tag} variant="text">{tag}</Button>
                         ))
                     }
                 </ul>

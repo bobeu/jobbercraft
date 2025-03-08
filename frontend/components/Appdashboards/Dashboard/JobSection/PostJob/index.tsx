@@ -1,14 +1,10 @@
 import "react-calendar/dist/Calendar.css";
 import * as React from "react";
 import Grid from "@mui/material/Grid";
-// import DisplayCalendarModal from "./DisplayCalendarModal";
-import Calendar from "react-calendar";
-// import TextField from "@mui/material/TextField";
 import Collapsible  from '@/components/Collapsible';
 import { CATEGORIES } from '@/components/constants';
 import Tooltip from "@mui/material/Tooltip";
-import { UserInputBase } from "@/components/UserInput";
-import DisplayCalendarModal from "./DisplayCalendarModal";
+// import { UserInputBase } from "@/components/UserInput";
 import postJob from "@/apis/update/jobberCraft/postJob";
 import { useAccount, useConfig } from "wagmi";
 import { formatAddr } from "@/utilities";
@@ -122,7 +118,7 @@ export default function PostJob() {
                 {'o Job title'} 
               </h1>
               <div className="w-full p-2 flex justify-start gap-1 md:gap-12 items-center h-[42px] bg-gray-50 text-cyan-400 font-semibold">
-                <UserInputBase 
+                <input 
                   placeholder="Write job title"
                   onChange={(event) => handleChange(event, 'title')}
                   type="text"
@@ -145,7 +141,7 @@ export default function PostJob() {
                 <span className="text-sm text-ellipsis align-text-bottom text-cyan-200">{"(This could be a github link or link to Google spreadsheet)"}</span>
               </h1>
               <div className="w-full p-2 flex justify-start gap-1 md:gap-12 items-center h-[42px] bg-gray-50 text-cyan-400 font-semibold">
-                <UserInputBase 
+                <input 
                   placeholder="In days"
                   onChange={(event) => handleChange(event, 'enddate')}
                   type="number"
@@ -168,7 +164,7 @@ export default function PostJob() {
                 <span className="text-sm text-ellipsis align-text-bottom text-cyan-200">{"(This could be a github link or link to Google spreadsheet)"}</span>
               </h1>
               <div className="w-full p-2 flex justify-start gap-1 md:gap-12 items-center h-[42px] bg-gray-50 text-cyan-400 font-semibold">
-                <UserInputBase 
+                <input 
                   placeholder="Job description URI"
                   onChange={(e) => handleChange(e, 'jobref')}
                   type="text"
@@ -192,7 +188,7 @@ export default function PostJob() {
                 <span className="text-sm text-ellipsis align-text-bottom text-cyan-200">{"(Amount you're willing to pay for this job)"}</span>
               </p>
               <div className="w-[100%] p-2 flex justify-start gap-4 md:gap-12 items-center h-[42px] bg-gray-50 font-semibold">
-                <UserInputBase 
+                <input 
                   placeholder="OfferPrice"
                   onChange={(event) => handleChange(event, 'offerprice')}
                   type="number"

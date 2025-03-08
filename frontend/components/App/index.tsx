@@ -4,8 +4,8 @@ import DashBoardFeatures from "@/components/Features";
 import HomeHeader from "./HomeHeader";
 import Testimonial from "@/components/Testimonial";
 import PublicNavbar from "@/components/common/PublicNavbar";
-import { Nodeselector } from "./NodeSelector";
 import AppMain from "../Appdashboards/AppMain";
+import { Routes, Route } from "react-router-dom";
 import BecomeAJobber from "../Appdashboards/Dashboard/JobSection/JobTabs/BecomeAJobber";
 
 const home = () => {
@@ -22,10 +22,11 @@ const home = () => {
 export default function App() {
   return (
     <main className="p-0 bg-green1 min-h-screen">
-      <Nodeselector 
-        nodes={[home(), <AppMain />,<BecomeAJobber />]} 
-        paths={["/", "/appmain","/becomeajobber"]} 
-      />
+      <Routes >
+        <Route path={"/"} element={home()} />
+        <Route path={"/appmain"} element={<AppMain />} />
+        <Route path={"/becomeajobber"} element={<BecomeAJobber />} />
+      </Routes>
       <PublicFooter />
     </main>
   );
