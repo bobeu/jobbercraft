@@ -1,4 +1,4 @@
-import { zeroAddress } from 'viem';
+import { stringToHex, zeroAddress } from 'viem';
 import { Profile } from './customTypes';
 import BigNumber from 'bignumber.js';
 import { JobMetadata, JobStatus, JobType } from './customTypes';
@@ -13,309 +13,310 @@ export const flexSpread = "flex justify-between items-center";
 export const flexEven = "flex justify-evenly items-center";
 export const JOBSTATUS = ['NULL', 'OPEN', 'TAKEN', 'COMPLETED', 'CLOSED'];
 export const JOBTYPE = ['ONEOFF', 'PARTTIME', 'FULLTIME'];
+
 export const MOCKJOBS: JobMetadata[] = [
   {
-    tags: ["DESIGN", "PHOTOSHOP", "ADOBE"],
-    curator: "Curator-Address",
+    tags: [stringToHex("DESIGN"), stringToHex("PHOTOSHOP"), stringToHex("ADOBE")],
+    curator: stringToHex("Curator-Address"),
     job: {
-      title: "Graphic designer",
+      title: stringToHex("Graphic designer"),
       jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.OPEN
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false,
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]
   },
   {
-    tags: ["DESIGN", "PHOTOSHOP", "ADOBE"],
-    curator: "Curator Address",
+    tags: [stringToHex("DESIGN"), stringToHex("PHOTOSHOP"), stringToHex("ADOBE")],
+    curator: stringToHex("Curator Address"),
     job: {
-      title: "Content designer",
+      title: stringToHex("Content designer"),
       jobType: JobType.FULLTIME,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.TAKEN
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]
   },
   {
-    tags: ["BACKEND", "SMARTCONTRACTS", "WEB3"],
-    curator: "Curator Address",
+    tags: [stringToHex("BACKEND"), stringToHex("SMARTCONTRACTS"), stringToHex("WEB3")],
+    curator: stringToHex("Curator Address"),
     job: {
-      title: "Smart Contract developer",
+      title: stringToHex("Smart Contract developer"),
       jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.COMPLETED
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]
   },
   {
-    tags: ["BACKEND", "SMARTCONTRACTS", "WEB3"],
-    curator: "Curator Address",
+    tags: [stringToHex("BACKEND"), stringToHex("SMARTCONTRACTS"), stringToHex("WEB3")],
+    curator: stringToHex("Curator Address"),
     job: {
-      title: "Smart Contract editor",
+      title: stringToHex("Smart Contract editor"),
       jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.NULL
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]
   },
 
   {
-    tags: ["BUSINESS", "FINANCE"],
-    curator: "Curator Address",
+    tags: [stringToHex("BUSINESS"), stringToHex("FINANCE")],
+    curator: stringToHex("Curator Address"),
     job: {
-      title: "Financial analyst",
+      title: stringToHex("Financial analyst"),
       jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.TAKEN
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]
   },
 
   {
-    tags: ["HEALTH"],
-    curator: "Curator Address",
+    tags: [stringToHex("HEALTH")],
+    curator: stringToHex("Curator Address"),
     job: {
-      title: "Health Advisor",
+      title: stringToHex("Health Advisor"),
       jobType: JobType.PARTTIME,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.CLOSED
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]
   },
   {
-    tags: ["HEALTH"],
-    curator: "Curator Address",
+    tags: [stringToHex("HEALTH")],
+    curator: stringToHex("Curator Address"),
     job: {
-      title: "Nutritionist",
+      title: stringToHex("Nutritionist"),
       jobType: JobType.ONEOFF,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.OPEN
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]
   },
   {
-    tags: ["ART"],
-    curator: "Curator Address",
+    tags: [stringToHex("ART")],
+    curator: stringToHex("Curator Address"),
     job: {
-      title: "Photography coach",
+      title: stringToHex("Photography coach"),
       jobType: JobType.PARTTIME,
-      jobRef: "https://linktojobdescription",
+      jobRef: stringToHex("https://linktojobdescription"),
       signature: 0,
-      datePosted: new Date().getTime(),
-      proposeEnd: 60 * 60 * 24 * 5,
+      datePosted: BigInt(new Date().getTime()),
+      proposeEnd: BigInt(60 * 60 * 24 * 5),
       offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: "Hirer Address",
+      hirer: stringToHex("Hirer Address"),
       jStatus: JobStatus.OPEN
     },
     requests: [
       {
         acceptance: false,
-        identifier: "jobber1",
+        identifier: stringToHex("jobber1"),
         myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 6,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber2",
+        identifier: stringToHex("jobber2"),
         myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 4,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
         signed: false
       },
       {
         acceptance: false,
-        identifier: "jobber3",
+        identifier: stringToHex("jobber3"),
         myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: 60 * 60 * 24 * 5,
+        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
         signed: false
       }
     ]

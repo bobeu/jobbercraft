@@ -2,6 +2,7 @@ import React from "react";
 import Slider from "react-slick";
 import { Typography } from "@mui/material";
 import Person1 from "@/components/assets/img/person1.png";
+import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 export default function Testimonial() {
   const settings = {
@@ -34,7 +35,11 @@ export default function Testimonial() {
 
             <div className="px-3 mt-16 flex justify-center">
               <div className="max-w-md w-full">
-                <Slider {...settings} >
+                <SwipeableDrawer
+                    onClose={() => null}
+                    onOpen={() => null}
+                >
+                {/* <Slider {...settings} > */}
                   {testimonials.map((testimonial, i) => (
                     <div key={i}>
                       <Typography
@@ -59,12 +64,13 @@ export default function Testimonial() {
                           - {testimonial.fullname}
                         </Typography>
                         <Typography variant="caption">
+                     
                           {testimonial.role}
                         </Typography>
                       </div>
                     </div>
                   ))}
-                </Slider>
+                </SwipeableDrawer>
               </div>
             </div>
           </div>

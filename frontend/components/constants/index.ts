@@ -67,54 +67,6 @@ export const CATEGORIES = [
   'FINANCE',
 ]
 
-
-// export function debounce<C>(callback: C, wait: number = 0): C & { flush: Function; cancel: Function; } {
-//   let debounceTimer: string | number | NodeJS.Timeout | undefined;
-//   let triggerArgs: any[];
-//   let triggerThis: any;
-
-//   function trigger(...arg: any[]) {
-//     triggerArgs = arg;
-//     triggerThis = this;
-//     clearTimeout(debounceTimer);
-//     debounceTimer = setTimeout(() => {
-//       callback.apply(triggerThis, triggerArgs);
-//     }, wait);
-//   }
-
-//   trigger.cancel = () => clearTimeout(debounceTimer);
-//   trigger.flush = () => {
-//     clearTimeout(debounceTimer);
-//     callback.apply(triggerThis, triggerArgs);
-//   };
-
-//   return trigger;
-// }
-
-// export function throttle(callback: { apply: (arg0: any, arg1: any) => void; }, wait = 0) {
-//   let throttleTimer: number | boolean | undefined;
-//   let triggerArgs: IArguments;
-//   let triggerThis: any;
-//   function trigger(this: any) {
-//     triggerArgs = arguments;
-//     triggerThis = this;
-//     if (throttleTimer) return;
-//     throttleTimer = true;
-//     setTimeout(() => {
-//       callback.apply(triggerThis, triggerArgs);
-//       throttleTimer = false;
-//     }, wait);
-//   }
-
-//   trigger.cancel = () => clearTimeout(throttleTimer);
-//   trigger.flush = () => {
-//     clearTimeout(throttleTimer);
-//     callback.apply(triggerThis, triggerArgs);
-//   };
-
-//   return trigger;
-// }
-
 export function capitalize(s: string | any[]) {
   return s && s[0].toUpperCase() + s.slice(1);
 }
