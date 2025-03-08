@@ -1,20 +1,20 @@
 import React from "react";
-import Slider from "react-slick";
+// import Slider from "react-slick";
 import { Typography } from "@mui/material";
 import Person1 from "@/components/assets/img/person1.png";
-import SwipeableDrawer from '@mui/material/SwipeableDrawer';
+// import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
 export default function Testimonial() {
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    pauseOnHover: true,
-    autoplaySpeed: 3000,
-  };
+  // const settings = {
+  //   dots: true,
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 1,
+  //   slidesToScroll: 1,
+  //   autoplay: true,
+  //   pauseOnHover: true,
+  //   autoplaySpeed: 3000,
+  // };
   return (
     <div id="testimonial" className="bg-green1 w-full relative flex justify-center items-center">
       <div className="container">
@@ -34,20 +34,16 @@ export default function Testimonial() {
             </div>
 
             <div className="px-3 mt-16 flex justify-center">
-              <div className="max-w-md w-full">
-                <SwipeableDrawer
-                    onClose={() => null}
-                    onOpen={() => null}
-                >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-20 max-w-7xl w-full">
                 {/* <Slider {...settings} > */}
                   {testimonials.map((testimonial, i) => (
-                    <div key={i}>
-                      <Typography
+                    <div key={i} className="bg-gray1 rounded-xl p-6 w-full">
+                      {/* <Typography
                         variant="h3"
-                        className="font-bold text-white text-center"
+                        className="font-bold text-gray-1 text-center"
                       >
                         {testimonial.company}
-                      </Typography>
+                      </Typography> */}
                       <Typography
                         variant="h6"
                         className="mt-8 text-center font-bold text-white"
@@ -70,7 +66,7 @@ export default function Testimonial() {
                       </div>
                     </div>
                   ))}
-                </SwipeableDrawer>
+                {/* </Slider> */}
               </div>
             </div>
           </div>
@@ -84,7 +80,7 @@ const testimonials = [
   {
     company: "JobberCraft",
     testimonial:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et",
+      "Building something that people love using has never been easy. But that joy seeing people derive value in what you build is very expensive",
     pics: Person1,
     fullname: "Isaac J.",
     role: "Developer, JobberCraft",
@@ -92,7 +88,7 @@ const testimonials = [
   {
     company: "JobberCraft",
     testimonial:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et",
+      "With JobberCraft, I am confident in th system. I get best hands to work on my project. The whole processes is full of fun",
     pics: Person1,
     fullname: "Bamishe Aderonke",
     role: "Media Analyst",
@@ -100,7 +96,7 @@ const testimonials = [
   {
     company: "JobberCraft",
     testimonial:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et",
+      "As a curator, I gain more experience coordinating projects. Even so, I earn something reasonable and commensurate to my efforts. Thank you JobberCraft.",
     pics: Person1,
     fullname: "Gideon MLali.",
     role: "Product Designer, JobberCraft",
@@ -108,7 +104,7 @@ const testimonials = [
   {
     company: "JobberCraft",
     testimonial:
-      "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et",
+      "JobberCraft helped me overcome over 2 years challenges trying to complete a project. In two weeks, I get couple of developers collaborate and finished up. That was impressive",
     pics: Person1,
     fullname: "Larry Ted.",
     role: "Tech lead, QES Ltd",

@@ -1,6 +1,4 @@
-import { stringToHex, zeroAddress } from 'viem';
-import { Profile } from './customTypes';
-import BigNumber from 'bignumber.js';
+import { stringToHex } from 'viem';
 import { JobMetadata, JobStatus, JobType } from './customTypes';
 
 export const INIT_ZOOM = '0%';
@@ -167,158 +165,162 @@ export const MOCKJOBS: JobMetadata[] = [
       }
     ]
   },
-
-  {
-    tags: [stringToHex("BUSINESS"), stringToHex("FINANCE")],
-    curator: stringToHex("Curator Address"),
-    job: {
-      title: stringToHex("Financial analyst"),
-      jobType: JobType.ONEOFF,
-      jobRef: stringToHex("https://linktojobdescription"),
-      signature: 0,
-      datePosted: BigInt(new Date().getTime()),
-      proposeEnd: BigInt(60 * 60 * 24 * 5),
-      offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: stringToHex("Hirer Address"),
-      jStatus: JobStatus.TAKEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber1"),
-        myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber2"),
-        myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber3"),
-        myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
-        signed: false
-      }
-    ]
-  },
-
-  {
-    tags: [stringToHex("HEALTH")],
-    curator: stringToHex("Curator Address"),
-    job: {
-      title: stringToHex("Health Advisor"),
-      jobType: JobType.PARTTIME,
-      jobRef: stringToHex("https://linktojobdescription"),
-      signature: 0,
-      datePosted: BigInt(new Date().getTime()),
-      proposeEnd: BigInt(60 * 60 * 24 * 5),
-      offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: stringToHex("Hirer Address"),
-      jStatus: JobStatus.CLOSED
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber1"),
-        myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber2"),
-        myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber3"),
-        myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
-        signed: false
-      }
-    ]
-  },
-  {
-    tags: [stringToHex("HEALTH")],
-    curator: stringToHex("Curator Address"),
-    job: {
-      title: stringToHex("Nutritionist"),
-      jobType: JobType.ONEOFF,
-      jobRef: stringToHex("https://linktojobdescription"),
-      signature: 0,
-      datePosted: BigInt(new Date().getTime()),
-      proposeEnd: BigInt(60 * 60 * 24 * 5),
-      offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: stringToHex("Hirer Address"),
-      jStatus: JobStatus.OPEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber1"),
-        myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber2"),
-        myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber3"),
-        myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
-        signed: false
-      }
-    ]
-  },
-  {
-    tags: [stringToHex("ART")],
-    curator: stringToHex("Curator Address"),
-    job: {
-      title: stringToHex("Photography coach"),
-      jobType: JobType.PARTTIME,
-      jobRef: stringToHex("https://linktojobdescription"),
-      signature: 0,
-      datePosted: BigInt(new Date().getTime()),
-      proposeEnd: BigInt(60 * 60 * 24 * 5),
-      offerPrice: BigInt(`100${"0".repeat(18)}`),
-      hirer: stringToHex("Hirer Address"),
-      jStatus: JobStatus.OPEN
-    },
-    requests: [
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber1"),
-        myBestPrice: BigInt(`120${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 6),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber2"),
-        myBestPrice: BigInt(`110${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 4),
-        signed: false
-      },
-      {
-        acceptance: false,
-        identifier: stringToHex("jobber3"),
-        myBestPrice: BigInt(`150${"0".repeat(18)}`),
-        proposedJobEnd: BigInt(60 * 60 * 24 * 5),
-        signed: false
-      }
-    ]
-  }
 ];
+
+
+
+  // {
+  //   tags: [stringToHex("BUSINESS"), stringToHex("FINANCE")],
+  //   curator: stringToHex("Curator Address"),
+  //   job: {
+  //     title: stringToHex("Financial analyst"),
+  //     jobType: JobType.ONEOFF,
+  //     jobRef: stringToHex("https://linktojobdescription"),
+  //     signature: 0,
+  //     datePosted: BigInt(new Date().getTime()),
+  //     proposeEnd: BigInt(60 * 60 * 24 * 5),
+  //     offerPrice: BigInt(`100${"0".repeat(18)}`),
+  //     hirer: stringToHex("Hirer Address"),
+  //     jStatus: JobStatus.TAKEN
+  //   },
+  //   requests: [
+  //     {
+  //       acceptance: false,
+  //       identifier: stringToHex("jobber1"),
+  //       myBestPrice: BigInt(`120${"0".repeat(18)}`),
+  //       proposedJobEnd: BigInt(60 * 60 * 24 * 6),
+  //       signed: false
+  //     },
+  //     {
+  //       acceptance: false,
+  //       identifier: stringToHex("jobber2"),
+  //       myBestPrice: BigInt(`110${"0".repeat(18)}`),
+  //       proposedJobEnd: BigInt(60 * 60 * 24 * 4),
+  //       signed: false
+  //     },
+  //     {
+  //       acceptance: false,
+  //       identifier: stringToHex("jobber3"),
+  //       myBestPrice: BigInt(`150${"0".repeat(18)}`),
+  //       proposedJobEnd: BigInt(60 * 60 * 24 * 5),
+  //       signed: false
+  //     }
+  //   ]
+  // },
+
+  // {
+  //   tags: [stringToHex("HEALTH")],
+  //   curator: stringToHex("Curator Address"),
+  //   job: {
+  //     title: stringToHex("Health Advisor"),
+  //     jobType: JobType.PARTTIME,
+  //     jobRef: stringToHex("https://linktojobdescription"),
+  //     signature: 0,
+  //     datePosted: BigInt(new Date().getTime()),
+  //     proposeEnd: BigInt(60 * 60 * 24 * 5),
+  //     offerPrice: BigInt(`100${"0".repeat(18)}`),
+  //     hirer: stringToHex("Hirer Address"),
+  //     jStatus: JobStatus.CLOSED
+  //   },
+  //   requests: [
+  //     {
+  //       acceptance: false,
+  //       identifier: stringToHex("jobber1"),
+  //       myBestPrice: BigInt(`120${"0".repeat(18)}`),
+  //       proposedJobEnd: BigInt(60 * 60 * 24 * 6),
+  //       signed: false
+  //     },
+  //     {
+  //       acceptance: false,
+  //       identifier: stringToHex("jobber2"),
+  //       myBestPrice: BigInt(`110${"0".repeat(18)}`),
+  //       proposedJobEnd: BigInt(60 * 60 * 24 * 4),
+  //       signed: false
+  //     },
+  //     {
+  //       acceptance: false,
+  //       identifier: stringToHex("jobber3"),
+  //       myBestPrice: BigInt(`150${"0".repeat(18)}`),
+  //       proposedJobEnd: BigInt(60 * 60 * 24 * 5),
+  //       signed: false
+  //     }
+  //   ]
+  // },
+
+// {
+//   tags: [stringToHex("HEALTH")],
+//   curator: stringToHex("Curator Address"),
+//   job: {
+//     title: stringToHex("Nutritionist"),
+//     jobType: JobType.ONEOFF,
+//     jobRef: stringToHex("https://linktojobdescription"),
+//     signature: 0,
+//     datePosted: BigInt(new Date().getTime()),
+//     proposeEnd: BigInt(60 * 60 * 24 * 5),
+//     offerPrice: BigInt(`100${"0".repeat(18)}`),
+//     hirer: stringToHex("Hirer Address"),
+//     jStatus: JobStatus.OPEN
+//   },
+//   requests: [
+//     {
+//       acceptance: false,
+//       identifier: stringToHex("jobber1"),
+//       myBestPrice: BigInt(`120${"0".repeat(18)}`),
+//       proposedJobEnd: BigInt(60 * 60 * 24 * 6),
+//       signed: false
+//     },
+//     {
+//       acceptance: false,
+//       identifier: stringToHex("jobber2"),
+//       myBestPrice: BigInt(`110${"0".repeat(18)}`),
+//       proposedJobEnd: BigInt(60 * 60 * 24 * 4),
+//       signed: false
+//     },
+//     {
+//       acceptance: false,
+//       identifier: stringToHex("jobber3"),
+//       myBestPrice: BigInt(`150${"0".repeat(18)}`),
+//       proposedJobEnd: BigInt(60 * 60 * 24 * 5),
+//       signed: false
+//     }
+//   ]
+// },
+
+// {
+//   tags: [stringToHex("ART")],
+//   curator: stringToHex("Curator Address"),
+//   job: {
+//     title: stringToHex("Photography coach"),
+//     jobType: JobType.PARTTIME,
+//     jobRef: stringToHex("https://linktojobdescription"),
+//     signature: 0,
+//     datePosted: BigInt(new Date().getTime()),
+//     proposeEnd: BigInt(60 * 60 * 24 * 5),
+//     offerPrice: BigInt(`100${"0".repeat(18)}`),
+//     hirer: stringToHex("Hirer Address"),
+//     jStatus: JobStatus.OPEN
+//   },
+//   requests: [
+//     {
+//       acceptance: false,
+//       identifier: stringToHex("jobber1"),
+//       myBestPrice: BigInt(`120${"0".repeat(18)}`),
+//       proposedJobEnd: BigInt(60 * 60 * 24 * 6),
+//       signed: false
+//     },
+//     {
+//       acceptance: false,
+//       identifier: stringToHex("jobber2"),
+//       myBestPrice: BigInt(`110${"0".repeat(18)}`),
+//       proposedJobEnd: BigInt(60 * 60 * 24 * 4),
+//       signed: false
+//     },
+//     {
+//       acceptance: false,
+//       identifier: stringToHex("jobber3"),
+//       myBestPrice: BigInt(`150${"0".repeat(18)}`),
+//       proposedJobEnd: BigInt(60 * 60 * 24 * 5),
+//       signed: false
+//     }
+//   ]
+// }
