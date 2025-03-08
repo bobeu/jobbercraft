@@ -1,6 +1,6 @@
-import jobberCraft from "../../../hardhat/deployments/testnet/JobberCraft.json";
-import jobber from "../../../hardhat/deployments/testnet/Jobber.json";
-import tUSDT from "../../../hardhat/deployments/testnet/TestUSDT.json";
+import jobberCraft from "@/deployments/testnet/JobberCraft.json";
+import jobber from "@/deployments/testnet/Jobber.json";
+import tUSDT from "@/deployments/testnet/TestUSDT.json";
 import { Address } from "@/customTypes";
 
 export const formatAddr = (x: string | (Address | undefined)) : Address => {
