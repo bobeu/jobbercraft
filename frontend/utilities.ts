@@ -172,32 +172,3 @@ export const formatJobContent = (jobMetadata: AllJobs, currentUser: Address) : {
     result
   }
 }
-
-// export const formatProfileData = (param: C3.ContributorStruct) : FormattedData => {
-//   const { payDate, colBals, turnTime, durOfChoice, expInterest, sentQuota, id, loan, } = param;
-//   const payDate_InSec = toBN(payDate.toString()).toNumber();
-//   const turnTime_InSec = toBN(turnTime.toString()).toNumber();
-//   const durOfChoice_InSec = toBN(durOfChoice.toString()).toNumber();
-//   const colBals_InEther = formatEther(toBigInt(toBN(colBals.toString()).toString()));
-//   const loan_InEther = formatEther(toBigInt(toBN(loan.toString()).toString()));
-//   const loan_InBN = toBN(loan.toString());
-//   const expInterest_InEther = formatEther(toBigInt(toBN(expInterest.toString()).toString()));
-//   const payDate_InDateFormat = getTimeFromEpoch(payDate_InSec);
-//   const turnTime_InDateFormat = getTimeFromEpoch(turnTime_InSec);
-//   const id_lowerCase = id.toString().toLowerCase()
-
-//   return {
-//     payDate_InDateFormat,
-//     payDate_InSec,
-//     turnTime_InDateFormat,
-//     turnTime_InSec,
-//     durOfChoice_InSec,
-//     colBals_InEther,
-//     loan_InEther,
-//     expInterest_InEther,
-//     id_lowerCase,
-//     id_toString: id.toString(),
-//     loan_InBN,
-//     sentQuota
-//   }
-// }

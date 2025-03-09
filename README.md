@@ -63,7 +63,7 @@ JobberCraft is built with activities to be 80% onchain. These are smart-contract
                     - Approves job completion
                         - Payment is automatically splitted among collaborators
 
-# How To Run Porject
+# Get Started
 - __Smart Contracts__
     - Clone the repository
     - Create a .env file in the root directory of the project, and fill with required variables as shown in the __.env.example__. Be sure to add it to __gitignore__ to avoid being accidentally pushed to VC.
@@ -109,7 +109,7 @@ JobberCraft is built with activities to be 80% onchain. These are smart-contract
         ```
 
 ## Demo Link
-
+__[Deployed On Vercel](https://jobbercraft.vercel.com/)__
 
 ## Project link
 __[JobberCraft Github](https://github.com/bobeu/jobbercraft)__

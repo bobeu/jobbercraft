@@ -27,17 +27,16 @@ const electroneum_testnet : Chain = {
     default: {
       http: ["https://rpc.ankr.com/electroneum_testnet",`https://rpc.ankr.com/electroneum_testnet/${process.env.NEXT_PUBLIC_ANKR_API_KEY}`],
       webSocket: []
-      // "https://rpc.ankr.com/electroneum_testnet", 
     }
   }
 }
 
 const config = getDefaultConfig({
-  appName: 'Simplifinance',
+  appName: 'JobberCraft',
   projectId,
   appIcon: '/favicon-32x32.png',
   appDescription: 'A decentralized freelancing protocol',
-  appUrl: '',
+  appUrl: 'https://jobbercraft.vercel.com',
   chains: [ electroneum_testnet],
   
 });
