@@ -2,8 +2,6 @@
 
 pragma solidity 0.8.24;
 
-import "../interfaces/ICommon.sol";
-
 interface IJobber {
   event MembershipUpgraded(address indexed who);
   event MembershipDowngraded(address indexed who);

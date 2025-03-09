@@ -2,13 +2,13 @@
 
 pragma solidity 0.8.24;
 
-import "./Trustee.sol";
-import "./utils/Lib.sol";
-import "./interfaces/IJob.sol";
-import "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
-import "@openzeppelin/contracts/interfaces/IERC721.sol";
-import "./tokens/erc721/interfaces/IERC721Extended.sol";
-import "./jobbers/IJobbers.sol";
+import { Trustee } from "./Trustee.sol";
+import { Lib } from "./utils/Lib.sol";
+import { IJob } from "./interfaces/IJob.sol";
+import { IERC20Metadata } from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
+import { IERC721 } from "@openzeppelin/contracts/interfaces/IERC721.sol";
+import { IERC721Extended } from "./tokens/erc721/interfaces/IERC721Extended.sol";
+import { IJobber } from "./jobbers/IJobbers.sol";
 
 /** 
   
@@ -149,29 +149,6 @@ abstract contract Storage is IJob {
         Note - We explicitly initialize 5 empty interest slots for 
                 each job created.
     
-      @notice 
-      
-      Noticable error:
-            Using the current compiler version in the truffle config file, I get 
-              compiler error while trying to instantiate a new request, which is 
-              more like copying from memory to the storage, and solidity seems not 
-              support such operation at this time.
-
-              jobs.push(jobber({
-                jobRef: jobRef,
-                datePosted: uint32(block.timestamp),
-                proposeEnd: uint32(proposeEnd),
-                offerPrice: offerPrice,
-                hirer: msg.sender,
-                jStatus: JobStatus.OPEN,
-                ...
-                requests: new jobber[](5)  <=== This part causes a panic, and the program exit, producing the following Compile error.
-              }))
-
-              CompileError: UnimplementedFeatureError: Copying of type struct Iprobationer.jobber memory[] memory to storage not yet supported.
-
-              This could have been the easiest way of creating an empty request array. Notwithstanding, to most problem, there is 
-              at least a way out.
   */
   function _postJob( 
     uint8 jobType,
