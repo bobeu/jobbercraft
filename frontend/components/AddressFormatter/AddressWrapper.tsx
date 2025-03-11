@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { getEllipsisTxt } from "./stringFormatter";
-import { blockie } from "./Blockie";
 import { zeroAddress } from "viem";
 
 const wrapToText = (arg: string | undefined) => String(arg);
@@ -15,7 +14,7 @@ const AddressWrapper = (props: AddressProps ) => {
       className={`w-${copyIconSize || '6'} h-${copyIconSize || '6'} text-white cursor-pointer`}
       viewBox="0 0 24 24"
       strokeWidth="3"
-      stroke="orange"
+      stroke="cyan"
       fill="none"
       strokeLinecap="round"
       strokeLinejoin="round"
@@ -35,7 +34,7 @@ const AddressWrapper = (props: AddressProps ) => {
 
   return (
     <div className={`flex justify-center items-center gap-1 ${overrideClassName}`}>
-      <span >{blockie({account: wrapToText(account), size})}</span> 
+      {/* <span >{blockie({account: wrapToText(account), size})}</span>  */}
       <a href={`https://xfiscan.com/address/${account}`} rel="noreferrer" target="_blank">{size ? getEllipsisTxt(wrapToText(account || zeroAddress), size) : account}</a>
       <span className="" >{(isClicked ? display && <Check /> : props?.display && <Copy />)}</span>
     </div>

@@ -6,6 +6,7 @@ import { Address, FormattedJobberContent, FormattedJobContent, } from "@/customT
 import { formatAddr, } from "@/utilities";
 import Button from '@mui/material/Button';
 import Drawer from "../Confirmation/Drawer";
+import { hexToString } from "viem";
 
 const BOXSTYLING = "h-[180px] lg:h-[150px] w-full rounded-lg border border-white1/20 p-4 space-y-2 text-orange-200 bg-white1/10";
 
@@ -28,7 +29,7 @@ export const InfoDisplay = ({ formattedJob, actions, popUpDrawer, toggleDrawer }
     }
 
     return(
-        <Drawer openDrawer={popUpDrawer} setDrawerState={toggleDrawer} styles={{ display: 'flex', flexDirection: 'column', justifyItems: 'center', gap: '16px', color: '#fed7aa', borderLeft: '1px solid rgb(249 244 244 / 0.2)',}} >
+        <Drawer openDrawer={popUpDrawer} setDrawerState={toggleDrawer} styles={{ borderLeft: '1px solid rgb(249 244 244 / 0.2)', height: '100%'}} >
             <div className={`space-y-4`}>
                 <div className={`${flexSpread} gap-6`}>
                     <button onClick={() => toggleDrawer(0)} className="w-2/4">
@@ -38,9 +39,9 @@ export const InfoDisplay = ({ formattedJob, actions, popUpDrawer, toggleDrawer }
                     </button>
                     { actions }
                 </div>
-                <ul className={`bg-gray1 p-4 rounded-lg border border-white1/20 text-orange-400 font-normal text-sm`}>
+                <ul className={`p-4 rounded-lg border border-white1/20 text-cyan-500 font-normal text-sm`}>
                     <li className={`${flexSpread}`}>
-                        <h3 className="">Hirer</h3>
+                        <h3 className="text-white2">Hirer</h3>
                         <AddressWrapper 
                             size={4} 
                             copyIconSize="4" 
@@ -50,7 +51,7 @@ export const InfoDisplay = ({ formattedJob, actions, popUpDrawer, toggleDrawer }
                         />
                     </li>
                     <li className={`${flexSpread}`}>
-                        <h3 className="">Curator</h3>
+                        <h3 className="text-white2">Curator</h3>
                         <AddressWrapper 
                             size={4} 
                             copyIconSize="4" 
@@ -59,20 +60,12 @@ export const InfoDisplay = ({ formattedJob, actions, popUpDrawer, toggleDrawer }
                             display 
                         />
                     </li>
-                    {/* <li className={`${flexSpread}`} >
-                        <h3 className="">{"Financed"}</h3>
-                        <p className="">{`${allGh_toNumber}`}</p>
-                    </li>
-                    <li className={`${flexSpread}`} >
-                        <h3 className="">{"Reserved Id"}</h3>
-                        <p className="">{`${rId.toString()}`}</p>
-                    </li> */}
                 </ul>
-                <ul className={`${BOXSTYLING} text-xs`}>
-                    <h1>Tags</h1>
+                <h1 className="text-white2">Tags</h1>
+                <ul className={`text-white2/50 flex justify-between items-center text-[11px] `}>
                     {
                         tags?.map((tag) => (
-                            <Button key={tag} variant="text">{tag}</Button>
+                            <h3 key={tag} className="border border-white2/30 p-2 rounded-lg">{hexToString(formatAddr(tag))}</h3>
                         ))
                     }
                 </ul>

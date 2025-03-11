@@ -1,37 +1,10 @@
 import React from "react";
 import type {ButtonObj, FormattedJobContent,} from "@/customTypes";
-// import { formatAddr, formatJobContent } from "@/utilities";
 import { JOBSTATUS, JOBTYPE, } from "@/constants";
-// import { useAccount, useConfig } from "wagmi";
-// import { ActionButton } from "../ActionButton";
-// import { InfoDisplay, Providers } from '../DrawerWrapper';
-// import { renderIcon } from '../Icons';
-// import { PermissionPopUp } from '../PermissionPopUp';
 import { CustomButton } from "@/components/CustomButton";
-// import { getContractData } from "@/apis/utils/getContractData";
 import { ActionButton, } from "./ActionButton";
-// import useAppStorage from "@/components/StateContextProvider/useAppStorage";
 import { InfoDisplay, JobbersInfo } from "./ActionButton/JobberInfo/JobbersInfo";
-import { formatAddr, getTimeFromEpoch } from "@/utilities";
-import { hexToString } from "viem";
-
-// /**
-//  * Filter the data list for current user
-//  * @param cData : Formatted providers' data
-//  * @param currentUser : Connected user wallet.
-//  * @returns Object: <{isMember: boolean, data: FormattedData}>
-//  */
-// const filterUser = (
-//     cData: FormattedJobContent[] | undefined,
-//     currentUser: Address
-// ) : FormattedJobContent => {
-//     ;
-//     const filtered = cData.filter(({id_lowerCase}) => id_lowerCase === currentUser.toString().toLowerCase());
-//     if(filtered?.length > 0) {
-//         result = filtered[0];
-//     }
-//     return result;
-// }
+import { getTimeFromEpoch } from "@/utilities";
 
 export const JobCard = ({jobDetail, jobId}: {jobDetail: FormattedJobContent, jobId: bigint}) => {
     const [inputModalOn, setInputModal] = React.useState<boolean>(false);
@@ -40,33 +13,13 @@ export const JobCard = ({jobDetail, jobId}: {jobDetail: FormattedJobContent, job
     const [providerDrawer, setProviderDrawer]= React.useState<number>(0);
     const[buttonObj, setButtonObj] = React.useState<ButtonObj>({functionName: 'null', buttonText: '',  disable: false});
 
-    // const account = formatAddr(useAccount().address);
-    // const config = useConfig();
-    // const { proposedCompletionDate, myBestPrice } = useAppStorage();
-    // const callback : TransactionCallback = (arg) => setmessage(arg.message);
-
-    // const { jCraft, jobber, tUSDT } = getContractData();
     const { 
-        // curator,
         job: { datePosted, jStatus, jobRef, jobType, offerPrice, proposeEnd, title},
         requests,
-        // tags,
         isCollab,
         isHirer
     } = jobDetail;
     const status = JOBSTATUS[jStatus]
-    // const otherParam : OtherParam = {
-    //     request_TWK: {...common, myBestPrice: BigInt(myBestPrice), proposedCompletionDateInDays: Number(proposedCompletionDate) },
-    //     submit_ASC: {...common },
-    //     cancel_JOB: {...common },
-    //     approve_CMP: {...common }
-    // }
-
-//     export const jobStatus = ['NULL', 'OPEN', 'TAKEN', 'COMPLETED', 'CLOSED'];
-// export const jobType = ['ONEOFF', 'PARTTIME', 'FULLTIME'];
-    // const showPermissionDetail = (arg:number) => setPermissionDrawer(arg);
-    // export type TxnType = 'postJob' | 'requestToWork' | 'becomeAJobber' | 'approveRequestToWork' | 'approveCompletion' | 'cancel' | 'submitAndSignCompletion'
-
     const showProviderDetails = (arg:number) => setProviderDrawer(arg);
 
     React.useEffect(() => {
@@ -135,7 +88,7 @@ export const JobCard = ({jobDetail, jobId}: {jobDetail: FormattedJobContent, job
                         <h3 className="">{'Ref:'}</h3>
                         <h3 className="">Locked</h3>
                     </div>
-                    <h2 className="absolute right-0 top-[1px] text-lg lg:text-2xl p-2 font-black text-cyan-500 bg-gray1 border-r border-r-green1 rounded-tr-[26px] rounded-bl-[26px]">
+                    <h2 className="absolute right-0 top-[1px] text-lg lg:text-2xl p-2 font-black text-cyan-500 bg-gray1 border-r border-r-green1 rounded-tr-[26px] rounded-bl-[">
                         {`$${offerPrice}`}
                     </h2>
                 </div>

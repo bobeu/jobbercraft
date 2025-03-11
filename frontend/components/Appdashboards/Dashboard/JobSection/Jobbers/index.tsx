@@ -12,7 +12,7 @@ const index = () => {
         <input
           type="text"
           placeholder='Search name'
-          className='bg-gray1 border border-green1 rounded-lg'
+          className='bg-gray1 border border-green1 rounded-xl p-2'
         />
       </div>
       <div className="w-full h-full container grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 p-4 ">

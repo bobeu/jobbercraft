@@ -59,16 +59,20 @@ export const Confirmation :
                     </svg>
                 </button>
                 <h1 className='pb-6 text-md'>{ loading? "Processing Transaction ..." : displayMessage || '' }</h1>
-                <ButtonTemplate 
-                    buttonAContent="Cancel"
-                    buttonBContent={loading ? <Spinner color={"white"} /> : "Proceed"}
-                    buttonAFunc={handleCloseDrawer}
-                    buttonBFunc={handleSendTransaction}
-                    disableButtonA={loading}
-                    disableButtonB={loading}
-                    overrideClassName="" 
-                    buttonAExtraClassName={""} 
-                    buttonBExtraClassName={""}                />
+                <div className="w-full flex justify-around">
+                    <button 
+                        onClick={handleCloseDrawer}
+                        className="border border-white2/30 px-3 py-2 rounded-xl text-red-400 w-[40%] hover:bg-gray1"
+                    >
+                        Cancel
+                    </button>
+                    <button
+                        onClick={handleSendTransaction}
+                        className="border border-white2/30 px-3 py-2 rounded-xl bg-gray1 text-cyan-400 w-[40%] hover:bg-gray1 place-items-center"
+                    >
+                        {loading ? <Spinner color={"white"} /> : "Proceed"}
+                    </button>
+                </div>
                 <Message />
             </Stack>
         </Drawer>
