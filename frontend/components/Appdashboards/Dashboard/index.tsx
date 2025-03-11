@@ -26,9 +26,8 @@ function DashBoard() {
   const handleButtonClick = () => navigate('/', {preventScrollReset: true});
 
   return (
-    <React.Fragment>
-      <section className="bg-[url('/map-background.svg')] bg-no-repeat bg-cover bg-right-top w-full bg-gray1" id='applandingpage'>
-        <Container maxWidth='lg'>
+    <div className="h-scr">
+        <Container maxWidth='lg' id='applandingpage'>
           <div className="w-full flex justify-between items-center py-4 ">
             <button onClick={handleButtonClick} className=" text-white1/30 md:text-white1/70 text-sm md:text-lg border border-white1/30  px-3 py-2 rounded-xl font-semibold hover:text-cyan-400">
               Back
@@ -52,7 +51,6 @@ function DashBoard() {
                 </button>
               </div>
             </div>
-
           </div>
 
           <div className="grid gap-y-6 gap-x-6 md:grid-cols-3 mb-10">
@@ -72,8 +70,7 @@ function DashBoard() {
           </div>
         </Container>
         <AppNavigation handleChange={handleChange} value={value}/>
-      </section>
-    </React.Fragment>
+    </div>
   );
 }
 export default DashBoard;

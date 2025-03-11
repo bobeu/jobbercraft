@@ -22,6 +22,7 @@ function CustomTabPanel(props: TabPanelProps) {
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
       {...other}
+      className='h-screen overflow-auto my-8'
     >
       {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
     </div>
@@ -37,7 +38,7 @@ function a11yProps(index: number) {
 
 export default function AppNavigation({handleChange, value} : {handleChange: (event: React.SyntheticEvent, newValue: number) => void, value: number}) {
   return (
-    <Box sx={{ width: '100%', height: '100%' }}>
+    <Box sx={{ width: '100%', }}>
       <Box sx={{ borderBottom: 1, borderColor: 'divider', }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Jobs" {...a11yProps(0)} style={{color: value === 0? 'cyan' : 'whitesmoke'}}/>
