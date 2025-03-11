@@ -21,13 +21,15 @@ const home = () => {
 
 export default function App() {
   return (
-    <main className="p-0 bg-green1 min-h-screen">
-      <Routes >
-        <Route path={"/"} element={home()} />
-        <Route path={"/appmain"} element={<AppMain />} />
-        <Route path={"/becomeajobber"} element={<BecomeAJobber />} />
-      </Routes>
+    <React.Fragment>
+      <main className="p-0 bg-green1 min-h-screen">
+        <Routes >
+          <Route path={"/"} element={home()} />
+          <Route path={"/appmain"} element={<AppMain />} />
+          <Route path={"/becomeajobber"} element={<BecomeAJobber />} />
+        </Routes>
+      </main>
       <PublicFooter />
-    </main>
+    </React.Fragment>
   );
 }

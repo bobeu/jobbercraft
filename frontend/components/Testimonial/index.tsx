@@ -1,10 +1,14 @@
 import React from "react";
 // import Slider from "react-slick";
-import { Typography } from "@mui/material";
+import { Avatar, Typography } from "@mui/material";
 import Person1 from "@/components/assets/img/person1.png";
+import Image from "next/image";
 // import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 
+// const COLOR_INTERPERLATION = ['text-blue-400', 'text-green-400', 'text-yellow-400', 'text -red-400'];
+
 export default function Testimonial() {
+  const [ slideIndex, setIndex] = React.useState<number>(0);
   // const settings = {
   //   dots: true,
   //   infinite: true,
@@ -15,6 +19,18 @@ export default function Testimonial() {
   //   pauseOnHover: true,
   //   autoplaySpeed: 3000,
   // };
+  React.useEffect(() => {
+    const length = testimonials.length;
+    setTimeout(
+      () => setIndex(
+        (prev) => {
+          return prev === (length - 1)? 0 : prev + 1;
+        }
+      ), 
+      7000
+    );
+    // return clearTimeout(3000);
+  });
   return (
     <div id="testimonial" className="bg-green1 w-full relative flex justify-center items-center">
       <div className="container">
@@ -36,34 +52,32 @@ export default function Testimonial() {
             <div className="px-3 mt-16 flex justify-center">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-20 max-w-7xl w-full">
                 {/* <Slider {...settings} > */}
-                  {testimonials.map((testimonial, i) => (
-                    <div key={i} className="bg-gray1 rounded-xl p-6 w-full">
-                      {/* <Typography
-                        variant="h3"
-                        className="font-bold text-gray-1 text-center"
-                      >
-                        {testimonial.company}
-                      </Typography> */}
-                      <Typography
-                        variant="h6"
-                        className="mt-8 text-center font-bold text-white"
-                      >
-                        {testimonial.testimonial}
-                      </Typography>
+                  {testimonials.filter((item, i) => i === slideIndex).map((testimonial, i) => (
+                    <div key={i} className="p-6 text-center flex justify-between items-center gap-2">
+                      <button className="text-white/40 text-lg font-bold p-2 text-center">{'<'}</button>
+                      <div className={`bg-gray1 p-4 rounded-3xl`}>
+                        <h3 className="font-bold text-red-400 text-center">
+                          {testimonial.company}
+                        </h3>
+                        <h3 className={`mt-4 text-center text-lg font-bold text-white h-[150px]`}>
+                          {testimonial.testimonial}
+                        </h3>
 
-                      <div className="mt-8 flex justify-center flex-col items-center text-cyan-200">
-                        {/* <Avatar
-                          alt={testimonial.fullname}
-                          src={testimonial.pics}
-                        /> */}
-                        <Typography variant="h5" className="font-bold ">
-                          - {testimonial.fullname}
-                        </Typography>
-                        <Typography variant="caption">
-                     
-                          {testimonial.role}
-                        </Typography>
+                        <div className="mt-4 flex justify-center flex-col items-center text-cyan-200">
+                          <Image
+                            alt={testimonial.fullname}
+                            src={testimonial.pics}
+                          />
+                          <h5 className="font-bold ">
+                            - {testimonial.fullname}
+                          </h5>
+                          <h5 className="text-xs text-cyan-500">
+                      
+                            {testimonial.role}
+                          </h5>
+                        </div>
                       </div>
+                      <button className="text-white/40 text-lg font-bold p-2 text-center">{'>'}</button>
                     </div>
                   ))}
                 {/* </Slider> */}

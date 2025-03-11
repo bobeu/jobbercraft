@@ -17,36 +17,34 @@ import { Paper, Typography } from "@mui/material";
 
 export default function Features() {
   return (
-    <> 
-      <section id="features" className="bg-gray1 bg-[url('/map-background.svg')] bg-no-repeat bg-cover bg-right-top w-full h-full ">
-        <div className="w-full relative flex justify-center items-center py-20">
-          <div>
-            <div className="text-center my-6 font-semibold flex justify-center flex-col items-center">
-              <h1 className="font-bold text-4xl text-cyan-300">
-                Key Features
-              </h1>
-            </div>
-            <div className="container grid grid-cols-1 md:grid-cols-3 gap-4">
-              {featureCards.map((feature, i) => (
-                <div key={i} className="bg-green1 shadow-sm shadow-cyan-600 p-14 rounded-3xl text-cyan-100">
-                  <div className="text-center flex flex-col">
-                    <div className="mb-4 justify-center items-center w-28 mx-auto">
-                      {feature.icon}
-                    </div>
-                    <Typography variant="h6" className="font-bold">
-                      {feature.title}
-                    </Typography>
-                    <Typography variant="body2" className="p-2 text-cyan-50">
-                      {feature.description}
-                    </Typography>
+    <section id="features" className="bg-gray1 bg-[url('/map-background.svg')] bg-no-repeat bg-cover bg-right-top w-full h-full p-6 md:p-8">
+      <div className="w-full relative flex justify-center items-center py-20">
+        <div>
+          <div className="text-center my-6 font-semibold flex justify-center flex-col items-center">
+            <h1 className="font-bold text-4xl text-cyan-300">
+              Key Features
+            </h1>
+          </div>
+          <div className="container grid grid-cols-1 md:grid-cols-3 gap-4">
+            {featureCards.map((feature, i) => (
+              <div key={i} className="bg-green1 shadow-sm shadow-cyan-600 p-14 rounded-3xl text-cyan-100">
+                <div className="text-center flex flex-col">
+                  <div className="mb-4 justify-center items-center w-28 mx-auto">
+                    {feature.icon}
                   </div>
+                  <Typography variant="h6" className="font-bold">
+                    {feature.title}
+                  </Typography>
+                  <Typography variant="body2" className="p-2 text-cyan-50">
+                    {feature.description}
+                  </Typography>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
         </div>
-      </section>  
-    </>
+      </div>
+    </section>  
   );
 }
 
