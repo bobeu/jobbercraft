@@ -6,7 +6,6 @@ import DashBoard from "../Dashboard";
 function AppMain() {
   return (
     <React.Fragment>
-      {/* <AppHeader /> */}
       <Suspense fallback>
         <DashBoard />
       </Suspense>

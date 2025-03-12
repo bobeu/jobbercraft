@@ -3500,9 +3500,9 @@ contract JobberCraft_Flat is ReadOnly, Pausable, Curators {
           @param curatorId : On the frontend, curators are mapped to their respective ids,
                   Hirers may add curator service or not.
           @param offerPrice : The amount in stable coin the hirer is willing to pay for this job.
-          Note - Hirer must have given approval to withdraw the offerPrice in cUSD, which
+          Note - Hirer must have given approval to withdraw the offerPrice in uSDT, which
                   must also be greater than minimum offer.
-                  Note : Payment currency is in cUSD. 
+                  Note : Payment currency is in uSDT. 
   */
   function postJob(
     uint8 jobType,

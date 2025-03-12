@@ -4,7 +4,6 @@ import Grid from "@mui/material/Grid";
 import Collapsible  from '@/components/Collapsible';
 import { CATEGORIES } from '@/components/constants';
 import Tooltip from "@mui/material/Tooltip";
-// import { UserInputBase } from "@/components/UserInput";
 import postJob from "@/apis/update/jobberCraft/postJob";
 import { useAccount, useConfig } from "wagmi";
 import { formatAddr } from "@/utilities";

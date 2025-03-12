@@ -1,6 +1,5 @@
-import { ActionCreatorWithPayload, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { logoutAction } from "./StoreActionConfig";
-// ActionCreatorWithPayload<any, "global/setAuthUser">
 export const globalInitialState = {
   isSideMenu: false,
   isDocumentPreviewSideMenu: false,

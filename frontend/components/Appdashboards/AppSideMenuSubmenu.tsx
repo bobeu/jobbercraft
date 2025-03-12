@@ -1,13 +1,8 @@
 import Menu from '@mui/material/Menu';
 import React from 'react';
-// import { Layout, Menu } from 'antd';
-// import type { ItemType, MenuItemType } from 'antd/es/menu/hooks/useItems';
 
-// export type Items = ItemType<MenuItemType>[] | undefined;
-// items={items} 
 interface AppSideMenuSubmenuProps {
   defaultSelectedKey: string;
-  // items: Items;
 }
 
 export const AppSideMenuSubmenu = (props: AppSideMenuSubmenuProps) => {

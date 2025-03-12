@@ -5,48 +5,11 @@ import { Link,} from "react-router-dom";
 import { JobberCraftLogo } from "../assets";
 import { RouteEnum } from "../constants";
 import { AppSideMenuSubmenu } from "./AppSideMenuSubmenu";
-// import type { MenuProps } from 'antd';
-// import { DesktopOutlined, FileOutlined, PieChartOutlined, TeamOutlined, UserOutlined, } from '@ant-design/icons';
-
-// type MenuItem = Required<MenuProps>['items'][number];
-
-// function getItem(
-//   label: React.ReactNode,
-//   key: React.Key,
-//   icon?: React.ReactNode,
-//   children?: MenuItem[],
-// ): MenuItem {
-//   return {
-//     key,
-//     icon,
-//     children,
-//     label,
-//   } as MenuItem;
-// }
-
-{/* <PieChartOutlined /> */}
-{/* <DesktopOutlined />
-<UserOutlined /> */}
-{/* <TeamOutlined />
-<FileOutlined /> */}
-// const items: MenuItem[] = [
-//   getItem('Option 1', '1', <>Icon</>),
-//   getItem('Option 2', '2', <>Icon</>),
-//   getItem('User', 'sub1', <>Icon</>, [
-//     getItem('Tom', '3'),
-//     getItem('Bill', '4'),
-//     getItem('Alex', '5'),
-//   ]),
-//   getItem('Team', 'sub2', <>Icon</>, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-//   getItem('Files', '9', <>Icon</>),
-// ];
 
 function AppSideMenu() {
   const [ isSideMenu, setSideMenu ] = useState<boolean>(false);
   const islg = useMediaQuery(MediaQueryBreakpointEnum.lg);
   const defaultSelectedKey = '1';
-  // const isml = useMediaQuery(MediaQueryBreakpointEnum.sm);
-
   const toggleSideMenu = (x:boolean) => setSideMenu(x);
 
   return (
@@ -127,7 +90,6 @@ const LINKS = [
   },
   {
     name: "Main",
-    // path: RouteEnum.DASHBOARD_MAIN,
     icon: "group",
     submenu: false,
     children: ''

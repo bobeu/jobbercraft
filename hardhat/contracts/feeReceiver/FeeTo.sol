@@ -11,8 +11,6 @@ contract FeeTo is Ownable{
   receive() external payable {}
 
   function withdraw(address to, uint amount) public onlyOwner returns(bool _return) {
-    // require(owner != address(0) && msg.sender == owner, "Only owner");
-    // require(IERC20(cUSD).transfer(to, amount), "Transfer failed");
     uint nBalance = address(this).balance;
     if(nBalance > amount) {
       (bool success,) = to.call{value: amount}('');

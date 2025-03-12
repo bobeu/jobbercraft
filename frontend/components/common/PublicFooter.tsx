@@ -15,10 +15,6 @@ export default function PublicFooter() {
                 <Link href="/" className="flex items-center">
                   <JobberCraftTempLogo />
                 </Link>
-                {/* <Typography variant="body1" className="text-gray-300  my-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. At
-                  sed ac nulla amet.
-                </Typography> */}
               </div>
 
               <div className="text-white">

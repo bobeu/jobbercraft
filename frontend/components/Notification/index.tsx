@@ -2,7 +2,6 @@ import * as React from 'react';
 import Button from '@mui/material/Button';
 import Snackbar from '@mui/material/Snackbar';
 import IconButton from '@mui/material/IconButton';
-import useAppStorage from '../StateContextProvider/useAppStorage';
 
 type NotificationProp = {
   message: string;
@@ -13,7 +12,6 @@ export default function Notification(props: NotificationProp) {
   const [open, setOpen] = React.useState(false);
   const [prev, setPrevious] = React.useState(message);
 
-  // const { setTrxnStatus } = useAppStorage();
   React.useEffect(() => {
     if(message !== '' && message !== prev){
       setOpen(true);

@@ -1,6 +1,5 @@
 import {Button, Typography, Icon} from '@mui/material';
 import clsx from 'clsx';
-// import ErrorContentImg from "assets/images/ErrorContent.png";
 import useLogout from '../hooks/useLogout';
 import { IllustrationEmptyContent } from "../assets";
 

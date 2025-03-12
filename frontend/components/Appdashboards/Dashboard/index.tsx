@@ -1,11 +1,9 @@
 import React from "react";
-import { SmallRightArrow, IconEmployees } from "../../assets";
-// import Address from "../AppMain/Address";
+import { IconEmployees } from "../../assets";
 import Container from "@mui/material/Container";
 import { useAccount, } from "wagmi";
 import { ConnectWallet } from "@/components/ConnectWallet";
 import AppNavigation from "./AppNavigation";
-import { CustomButton } from "@/components/CustomButton";
 import { useNavigate } from "react-router-dom";
 
 function DashBoard() {
@@ -14,10 +12,6 @@ function DashBoard() {
   const navigate = useNavigate();
 
   const handlePostJob = () => setValue(1);
-
-  // const handleChangeIndex = (index: number) => {
-  //   setValue(index);
-  // };
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);

@@ -16,8 +16,6 @@ export default function ButtonTemplate (
         buttonAExtraClassName,
         buttonBExtraClassName
     } : ButtonTemplateProps) {
-// !displayOnboardUser && 'hover:shadow-sm hover:shadow-orange-200 animate-none text-xs md:text-md uppercase'
-// !displayOnboardUser && 'hover:shadow-sm hover:shadow-orange-200 text-xs md:text-md uppercase'
 
     return(
         <div className={`${flexSpread} ${padContainer} ${overrideClassName}`}>

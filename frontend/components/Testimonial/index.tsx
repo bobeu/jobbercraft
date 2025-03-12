@@ -1,24 +1,11 @@
 import React from "react";
-// import Slider from "react-slick";
-import { Avatar, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import Person1 from "@/components/assets/img/person1.png";
 import Image from "next/image";
-// import SwipeableDrawer from '@mui/material/SwipeableDrawer';
-
-// const COLOR_INTERPERLATION = ['text-blue-400', 'text-green-400', 'text-yellow-400', 'text -red-400'];
 
 export default function Testimonial() {
   const [ slideIndex, setIndex] = React.useState<number>(0);
-  // const settings = {
-  //   dots: true,
-  //   infinite: true,
-  //   speed: 500,
-  //   slidesToShow: 1,
-  //   slidesToScroll: 1,
-  //   autoplay: true,
-  //   pauseOnHover: true,
-  //   autoplaySpeed: 3000,
-  // };
+
   React.useEffect(() => {
     const length = testimonials.length;
     setTimeout(
@@ -29,7 +16,6 @@ export default function Testimonial() {
       ), 
       7000
     );
-    // return clearTimeout(3000);
   });
   return (
     <div id="testimonial" className="bg-green1 w-full relative flex justify-center items-center">
